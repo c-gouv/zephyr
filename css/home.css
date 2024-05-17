@@ -1,102 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Lilita+One&display=swap');
-
-*{
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Khula:wght@300;400;600;700;800&display=swap');
+* {
     margin: 0;
 }
 body {
-    background-color: #EEECFA;
-    color: #1D1D1D;
+    background-color: #00EF6E;
     overflow-x: hidden;
 }
-h1 {
-    margin-bottom: 1.46vw;
+main {
+    width: 100vw;
+    height: 87.8vh;
 }
-
-/* HEADER */
 header {
-    display: flex;
+    margin-inline: 10%;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 150px 20px 150px;
-    font-family: "Khula", sans-serif;
-    font-weight: 900;
-}
-.headerLogo {
-    width: 7.32vw;
-}
-.headerSectionButton {
-    position: relative;
-    top: 1vw;
-    gap: 3.66vw;
     display: flex;
+    margin-top: 10px;
 }
-.headerSectionButton a{
-    text-decoration: none;
-    color: #1D1D1D;
-    font-size: 1.17vw;
+#sobre {
+    background-color: #eeecfa;
+    height: 100vh;
+}
+.homeEfeito {
+    position: absolute;
+    bottom: 10%;
+    z-index: -1;
+    width: 100vw;
+    height: 11vh;
+}
+.headerEfeito {
+    position: absolute;
+    transform: scaleY(-1) scaleX(-1);
+    width: 100vw;
+    height: 13vh;
+    z-index: -1;
+    top: 0;
+}
+.logoHeader {
+    width: 150px;
+    filter: drop-shadow(0px 0px 2px #000000a3);
+}
+.headerButton {
+    font-family: "Khula", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-right: 20px;
+    margin-top: 5px;
+    font-weight: 800;
+    display: flex;
+    gap: 20px;
 }
 .headerLogin {
-    position: relative;
-    top: 1vw;
     font-family: "Khula", sans-serif;
+    font-size: 20px;
     font-weight: 900;
-    color: #EEECFA;
-    background-color: #91FD00;
-    border: 0px;
-    padding: 0.36vw 1.83vw 0.36vw 1.83vw;
-    border-radius:1vw;
-    font-size: 1.17vw;
-    word-spacing: 5px;
-    cursor: pointer;
+    padding-top: 4px;
+    padding-inline: 25px;
+    border: 1px solid #00EF6E;
+    background-color: white;
+    text-transform: uppercase;
+    border-radius: 15px;
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 1s ease;
 }
-
-/* HOME */
-#home {
-    position: relative;
+.headerLogin:hover{
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 1s ease;
+    background-color: #00EF6E;
+    color: black;
+    border-color: white;
 }
-.homeContent {
-    height: 32.94vw;
-    max-width: 60vw;
-    padding-inline: 10.98vw;
-    padding-top: 7.32vw;
+.headerButtonContainer {
+    display: flex;
+    align-items: center;
+}
+.content {
+    font-family: "Khula", sans-serif;
+    justify-content: center;
+    margin-left: 10%;
     display: flex;
     flex-direction: column;
-    font-family: "Lilita One", sans-serif;
-    font-size: 2.19vw;
+    height: 80%;
+    width: 100%;
 }
-.homeButtonContainer {
-    padding-top: 0.73vw;
-    display: flex;
-    gap: 3.66vw;
-}
-.homeButton {
-    width: 16.10vw;
-    height: 3.51vw;
-    font-family: "Khula", sans-serif;
+.content span {
+    width: 100%;
     font-weight: 900;
-    font-size: 1.45vw;
-    color: #EEECFA;
-    background-color: #91FD00;
-    border: 0px;
-    border-radius: 15px;
-    padding: 0.36vw 2.56vw 0.36vw 2.56vw;
+    font-size: 50px;
 }
-.homeBotton {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    background-color: #91FD00;
-    width: 100vw;
-    height: 6vh;
-    z-index: -1;
-}
-.homeImage {
-    position: absolute;
-    right: 1.46vw;
-    bottom: 0px;
-    width: 40.2vw;
-}
-
-/* SOBRE */
-
