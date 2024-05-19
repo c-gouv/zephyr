@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <!-- <img src="../img/fundo.svg" class="fundo"> -->
+    <div class="container" id="main">
+        <div class="cadastro">
+            <form action="#">
+                <h1>Crie sua conta</h1>
+                <input id="inputUser" type="text" placeholder="Usuário" required="">
+                <input id="inputEmail" type="email" placeholder="Email" required="">
+                <input id="inputSenha" type="password" placeholder="Senha" required="">
+                <input id="inputReSenha" type="password" placeholder="Repita a Senha" required="">
+                <button onclick="cadastrar()">Cadastre-se</button>
+            </form>
+        </div>
+        <div class="login">
+            <form action="#">
+                <h1>Faça login</h1>
+                <input id="inputUserEmail" type="email" placeholder="Email" required="">
+                <input id="inputUserSenha" type="password" placeholder="Senha" required="">
+                <a>Esqueceu a senha?</a>
+                <button onclick="login()">entrar</button>
+            </form>
+        </div>
+        <div class="container-trocar">
+            <div class="trocar">
+                <div class="trocar-esquerda">
+                    <h1>Já faz parte da comunidade?</h1>
+                    <p>Entre com seus dados e acesse sua conta<br>por favor insira seus dados</p>
+                    <button id="login">Entrar</button>
+                </div>
+                <div class="trocar-direita">
+                    <h1>Novo por aqui?</h1>
+                    <p>Crie sua conta e entre para a comunidade!</p>
+                    <button id="cadastro">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    const botaoCadastro = document.getElementById('cadastro');
+    const botaoLogin = document.getElementById('login');
+    const main = document.getElementById('main');
+
+    botaoCadastro.addEventListener('click', () => {
+        main.classList.add("painel-direita-ativo");
+    });
+    botaoLogin.addEventListener('click', () => {
+        main.classList.remove("painel-direita-ativo");
+    });
+
+    // CADASTRAR---------------------------------------------------------------------------------------------------------
+
+    function cadastrar(){
+        const user = inputUser.value
+        const email = inputEmail.value
+        const senha = inputSenha.value
+        
+        fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            userServer: user,
+            emailServer: email,
+            senhaServer: senha,
+        }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+            setTimeout(() => {
+                window.location = "login.html";
+            }, "2000");
+            } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    // ENTRAR---------------------------------------------------------------------------------------------------------
+    
+    function login() {
+        var emailVar = inputUserEmail.value;
+        var senhaVar = inputUserSenha.value;
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location = "./banana.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+</script>
