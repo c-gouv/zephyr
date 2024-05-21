@@ -2,31 +2,60 @@
 * {
     margin: 0;
 }
+html{
+    scroll-behavior: smooth;
+}
 body {
-    background-color: #00EF6E;
+    backdrop-filter: brightness(60%);
     overflow-x: hidden;
+    background-image: url(../assets/background.jpg);
+    background-position:initial;
+    background-size: 160%;
 }
 main {
     width: 100vw;
-    height: 87.8vh;
+    height: 100vh;
 }
 header {
-    margin-inline: 10%;
+    padding-inline: 10%;
     justify-content: space-between;
     align-items: center;
     display: flex;
-    margin-top: 10px;
+    padding-block: 15px;
+    position: sticky;
+    top: 0;
+    transition: all 0.5s;
+    background-color: transparent;
 }
-#sobre {
-    background-color: #eeecfa;
-    height: 100vh;
+.header.solid{
+    background-color: #1d1d1d;
 }
-.homeEfeito {
+#home{
+    height: 74%;
+    width: 100%;
+}
+.homeEfeito{
+    margin: 0;
+    bottom: 19%;
+    left: 0;
     position: absolute;
-    bottom: 10%;
-    z-index: -1;
     width: 100vw;
-    height: 11vh;
+    z-index: -1;
+}
+.homeButton{
+    background-color: #1d1d1d;
+    color: #00fa38;
+    border-radius: 10px;
+    border: 0;
+    width: max-content;
+    padding: 10px 20px;
+    font-weight: 900;
+    font-size: 16px;
+    border: 0;
+}
+.homeButton:hover{
+    cursor: pointer;
+    outline: 1px solid #00fa38;
 }
 .headerEfeito {
     position: absolute;
@@ -49,6 +78,16 @@ header {
     font-weight: 800;
     display: flex;
     gap: 20px;
+    color: white;
+}
+.headerButton a{
+    transition: color 0.2s ease-in;
+    text-decoration: none;
+    color: white;
+}
+.headerButton a:hover{
+    color: #00fa38;
+    transition: color 0.5s ease;
 }
 .headerLogin {
     font-family: "Khula", sans-serif;
@@ -56,15 +95,15 @@ header {
     font-weight: 900;
     padding-top: 4px;
     padding-inline: 25px;
-    border: 1px solid #00EF6E;
+    border: 2px solid #1d1d1d;
     background-color: white;
     text-transform: uppercase;
     border-radius: 15px;
-    transition: background-color 0.6s ease, color 0.6s ease, border-color 1s ease;
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.5s ease;
 }
 .headerLogin:hover{
-    transition: background-color 0.6s ease, color 0.6s ease, border-color 1s ease;
-    background-color: #00EF6E;
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.5s ease;
+    background-color: #00fa38;
     color: black;
     border-color: white;
 }
@@ -72,17 +111,28 @@ header {
     display: flex;
     align-items: center;
 }
-.content {
+.homeContent {
     font-family: "Khula", sans-serif;
-    justify-content: center;
     margin-left: 10%;
     display: flex;
     flex-direction: column;
-    height: 80%;
+    height: 88%;
     width: 100%;
+    margin-top: 8%;
+    gap: 4%;
 }
-.content span {
-    width: 100%;
+h1{
     font-weight: 900;
     font-size: 50px;
+    line-height: 120%;
+}
+.legenda{
+    line-height: 120%;
+    color: white;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+#sobre {
+    background-color: #1d1d1d;
+    height: 100vh;
 }

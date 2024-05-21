@@ -8,7 +8,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #EEECFA;
+    background-color: #1d1d1d;
     min-height: 100vh;
     font-family: "Khula", sans-serif;
 }
