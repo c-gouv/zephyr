@@ -140,6 +140,8 @@ button{
     transform: translateX(50%);
 }
 .trocar-esquerda, .trocar-direita{
+    padding-inline: 10px;
+    box-sizing: border-box;
     position: absolute;
     display: flex;
     align-items: center;
@@ -176,7 +178,12 @@ button{
     }
 }
 .fundo{
+    height: 120%;
     width: 100%;
     z-index: -10;
     position: absolute;
+}
+.logoLogin{
+    width: 40%;
+    margin-bottom: 10%;
 }

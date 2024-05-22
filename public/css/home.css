@@ -136,3 +136,49 @@ h1{
     background-color: #1d1d1d;
     height: 100vh;
 }
+.headerBlock{
+    background-color: #1d1d1d;
+}
+/* SOBRE--------------------------------------------------------------- */
+#sobre{
+    color: white;
+    font-family: 'Khula', sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+#sobre .titulo{
+    padding-block: 6%;
+    text-align: center;
+}
+.sobreContent{
+    margin-inline: 5%;
+    width: 100%;
+    gap: 1%;
+    display: flex;
+}
+.sobreContentText{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.sobreButton{
+    margin-top: 2%;
+    background-color: #00fa38;
+    color: #1d1d1d;
+    border-radius: 10px;
+    border: 0;
+    width: max-content;
+    padding: 10px 20px;
+    font-weight: 900;
+    font-size: 16px;
+    border: 0;
+}
+.sobreButton:hover{
+    cursor: pointer;
+    outline: 2px solid white;
+}
+.sobreImg{
+    width: 45%;
+    border-radius: 2vw;
+}

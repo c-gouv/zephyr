@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="./assets/img/logo.ico">
     <title>Zephyr</title>
 </head>
-<body>
+<body onscroll="headerOnTop()">
     <header id="header">
         <img src="./assets/img/logoExtendVerde.png" class="logoHeader">
         <div class="headerButtonContainer">
@@ -28,12 +28,16 @@
             </div>
             <img src="./assets/img/ventoCinza.svg" class="homeEfeito">
         </div>
+
         <div id="sobre">
-            <h1>SOBRE O <span>PROJETO</span></h1>
-            <div>
-                <h1>ZEPHYR</h1>
-                <span class="legenda">A Zephyr é um é uma plataforma que conecta jogadores de todas as habilidades e origens, promovendo uma comunidade inclusiva e acolhedora, onde as pessoas podem fechar times, para que possam se divertir e manter o respeito mútuo, buscamos criar um ambiente onde todos se sintam bem-vindos e valorizados.</span>
-                <button class="homeButton">PARTICIPE ➤</button>
+            <h1 class="titulo">SOBRE O <span style="color: #00FA38;">PROJETO</span></h1>
+            <div class="sobreContent">
+                <div class="sobreContentText">
+                    <h1 style="color: #00FA38;">ZEPHYR</h1>
+                    <span class="legenda">A Zephyr é um é uma plataforma que conecta jogadores de todas as habilidades e origens, promovendo uma comunidade inclusiva e acolhedora, onde as pessoas podem fechar times, para que possam se divertir e manter o respeito mútuo, buscamos criar um ambiente onde todos se sintam bem-vindos e valorizados.</span>
+                    <button class="sobreButton" onclick="redirecionarLogin()">PARTICIPE ➤</button>
+                </div>
+                <img src="./assets/aaaaaaaaaaaaaa.png" class="sobreImg">
             </div>
         </div>
     </main>
@@ -42,6 +46,9 @@
 </html>
 
 <script>
+    function headerOnTop() {
+        header.classList.toggle('headerBlock', scrollY > 0)
+    }
     function redirecionarLogin() {
         window.location.href="login.html"
     }
