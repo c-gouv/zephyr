@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Khula:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Lexend+Deca:wght@100..900&family=Lilita+One&display=swap');
 *{
     margin: 0;
-}
+} 
 body{
     background-color: #0c0c0c;
     width: 100vw;
-    font-family: "Khula", sans-serif;
+    font-family: "Lexend Deca", sans-serif;
+    font-style: normal;
 }
 /* HEADER ---------------------------------------------------------- */
 header{
@@ -58,15 +60,10 @@ header{
     transition: color 0.3s linear;
 }
 .iconSino{
-    height: 50%;
-    width: 25%;
     color: white;
     font-size: 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.3s linear;
-    background-color: #0c0c0c;
+    transition: color 0.3s ease;
 }
 .iconSino:hover{
     color: #00fa38;
@@ -88,14 +85,80 @@ main{
 }
 .feedSection{
     color: white;
-    font-weight: 900;
     font-size: larger;
     margin: 2% 0 1.4% 0;
     display: flex;
 }
 .feedSection a{
     margin-left: 4%;
+    font-family: 'Khula', sans-serif;
+    font-weight: 900;
 }
+/* POST ------------------------------------------------------- */
 .feedPost{
-
+    padding:3% 2%;
+    color: white;
+}
+.postUserInfo{
+    align-items: center;
+    display: flex;
+    margin-bottom: 3%;
+}
+.iconPost{
+    width: 7%;;
+}
+.postUserText{
+    display: flex;
+    flex-direction: column;
+    line-height: 100%;
+    padding-top: 1%;
+    margin-left: 1%;
+}
+.postUserNome{
+    font-weight: 900;
+    font-size: 1.1em;
+}
+.postUserHora{
+    font-weight: 300;
+    font-size: 0.9em;
+    color: #9a9a9a;
+}
+.feedPost h2{
+    margin-bottom: 1%;
+    font-size: 1.1vw;
+}
+.postTexto{
+    font-size: 0.9em;
+    color: #9a9a9a;
+}
+.partyList{
+    margin-top: 2%;
+    display: flex;
+    gap:3%
+}
+.partyList img:hover{
+    cursor: pointer;
+}
+.postInteracao{
+    margin-top: 3%;
+    display: flex;
+    gap: 5%
+}
+.interacao{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+.postInteracaoIcon{
+    font-size: 1.6vw;
+}
+.postContentContainer{
+    width: 100%;
+    cursor: pointer;
+}
+.evidenciarElementoHover{
+    color: #00fa38;
+}
+.evidenciarElementoToggle{
+    color: #00fa38;
 }
