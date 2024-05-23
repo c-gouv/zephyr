@@ -1,184 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Freeman&family=Khula:wght@300;400;600;700;800&display=swap');
-* {
+*{
     margin: 0;
 }
-html{
-    scroll-behavior: smooth;
-}
-body {
-    backdrop-filter: brightness(60%);
-    overflow-x: hidden;
-    background-image: url(../assets/background.jpg);
-    background-position:initial;
-    background-size: 160%;
-}
-main {
+body{
+    background-color: #0c0c0c;
     width: 100vw;
-    height: 100vh;
+    font-family: "Khula", sans-serif;
 }
-header {
-    padding-inline: 10%;
+/* HEADER ---------------------------------------------------------- */
+header{
+    background-color: #1d1d1d;
     justify-content: space-between;
-    align-items: center;
+    height: 10vh;
     display: flex;
-    padding-block: 15px;
-    position: sticky;
-    top: 0;
-    transition: all 0.5s;
-    background-color: transparent;
-}
-.header.solid{
-    background-color: #1d1d1d;
-}
-#home{
-    height: 74%;
-    width: 100%;
-}
-.homeEfeito{
-    margin: 0;
-    bottom: 19%;
-    left: 0;
-    position: absolute;
-    width: 100vw;
-    z-index: -1;
-}
-.homeButton{
-    background-color: #1d1d1d;
-    color: #00fa38;
-    border-radius: 10px;
-    border: 0;
-    width: max-content;
-    padding: 10px 20px;
-    font-weight: 900;
-    font-size: 16px;
-    border: 0;
-}
-.homeButton:hover{
-    cursor: pointer;
-    outline: 1px solid #00fa38;
-}
-.headerEfeito {
-    position: absolute;
-    transform: scaleY(-1) scaleX(-1);
-    width: 100vw;
-    height: 13vh;
-    z-index: -1;
-    top: 0;
-}
-.logoHeader {
-    width: 150px;
-    filter: drop-shadow(0px 0px 2px #000000a3);
-}
-.headerButton {
-    font-family: "Khula", sans-serif;
-    font-size: 20px;
-    text-transform: uppercase;
-    margin-right: 20px;
-    margin-top: 5px;
-    font-weight: 800;
-    display: flex;
-    gap: 20px;
-    color: white;
-}
-.headerButton a{
-    transition: color 0.2s ease-in;
-    text-decoration: none;
-    color: white;
-}
-.headerButton a:hover{
-    color: #00fa38;
-    transition: color 0.5s ease;
-}
-.headerLogin {
-    font-family: "Khula", sans-serif;
-    font-size: 20px;
-    font-weight: 900;
-    padding-top: 4px;
-    padding-inline: 25px;
-    border: 2px solid #1d1d1d;
-    background-color: white;
-    text-transform: uppercase;
-    border-radius: 15px;
-    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.5s ease;
-}
-.headerLogin:hover{
-    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.5s ease;
-    background-color: #00fa38;
-    color: black;
-    border-color: white;
-}
-.headerButtonContainer {
-    display: flex;
+    padding: 10px 5%;
     align-items: center;
 }
-.homeContent {
-    font-family: "Khula", sans-serif;
-    margin-left: 10%;
+.headerLogo{
+    height: 50px;
+}
+/* BARRA PESQUISA--------------------------------------------------- */
+.barraPesquisa{
     display: flex;
-    flex-direction: column;
-    height: 88%;
-    width: 100%;
-    margin-top: 8%;
-    gap: 4%;
-}
-h1{
-    font-weight: 900;
-    font-size: 50px;
-    line-height: 120%;
-}
-.legenda{
-    line-height: 120%;
-    color: white;
-    font-weight: 400;
-    font-size: 1.5rem;
-}
-#sobre {
-    background-color: #1d1d1d;
-    height: 100vh;
-}
-.headerBlock{
-    background-color: #1d1d1d;
-}
-/* SOBRE--------------------------------------------------------------- */
-#sobre{
-    color: white;
-    font-family: 'Khula', sans-serif;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-}
-#sobre .titulo{
-    padding-block: 6%;
-    text-align: center;
-}
-.sobreContent{
-    margin-inline: 5%;
-    width: 100%;
-    gap: 1%;
-    display: flex;
-}
-.sobreContentText{
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-}
-.sobreButton{
-    margin-top: 2%;
-    background-color: #00fa38;
-    color: #1d1d1d;
-    border-radius: 10px;
-    border: 0;
-    width: max-content;
-    padding: 10px 20px;
-    font-weight: 900;
-    font-size: 16px;
-    border: 0;
-}
-.sobreButton:hover{
-    cursor: pointer;
-    outline: 2px solid white;
-}
-.sobreImg{
     width: 45%;
-    border-radius: 2vw;
+    height: 56%;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 10vw;
+}
+.iconPesquisa{
+    height: 100%;
+    padding-block: 1vh;
+    margin-right: 2%;
+    margin-left: 2.5%;
+    font-size: 20px;
+    color: #00fa38;
+    align-items: center;
+    justify-content: center;
+}
+.inputPesquisa{
+    height: 100%;
+    width: 100%;
+    border-radius: 0 10vw 10vw 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding-inline: 3%;
+}
+/* AREA DO USUÁRIO ------------------------------------------------ */
+.headerUserArea{
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 10%;
+    transition: color 0.3s linear;
+}
+.iconSino{
+    height: 50%;
+    width: 25%;
+    color: white;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s linear;
+    background-color: #0c0c0c;
+}
+.iconSino:hover{
+    color: #00fa38;
+}
+.iconPfp{
+    height: 85%;
+}
+/* FEED ---------------------------------------- */
+main{
+    display: flex;
+    justify-content: center;
+}
+.feed{
+    margin-top: 7%;
+    width: 50%;
+    height: fit-content;
+    background-color: #1d1d1d;
+    border-radius: 1.5vw;
+}
+.feedSection{
+    color: white;
+    font-weight: 900;
+    font-size: larger;
+    margin: 2% 0 1.4% 0;
+    display: flex;
+}
+.feedSection a{
+    margin-left: 4%;
+}
+.feedPost{
+
 }
