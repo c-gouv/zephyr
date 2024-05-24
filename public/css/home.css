@@ -4,22 +4,24 @@
     margin: 0;
 } 
 body{
-    background-color: #0c0c0c;
+    background-image: url(../assets/homeBackground.png);
+    background-size: cover;
     width: 100vw;
     font-family: "Lexend Deca", sans-serif;
     font-style: normal;
+    overflow-x: hidden;
 }
 /* HEADER ---------------------------------------------------------- */
 header{
     background-color: #1d1d1d;
     justify-content: space-between;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     padding: 10px 5%;
     align-items: center;
 }
 .headerLogo{
-    height: 50px;
+    height: 45px;
 }
 /* BARRA PESQUISA--------------------------------------------------- */
 .barraPesquisa{
@@ -56,7 +58,7 @@ header{
     align-items: center;
     justify-content: space-between;
     display: flex;
-    width: 10%;
+    width: 8%;
     transition: color 0.3s linear;
 }
 .iconSino{
@@ -69,15 +71,16 @@ header{
     color: #00fa38;
 }
 .iconPfp{
-    height: 85%;
+    height: 70%;
 }
 /* FEED ---------------------------------------- */
 main{
     display: flex;
     justify-content: center;
+
 }
 .feed{
-    margin-top: 7%;
+    margin-top: 2%;
     width: 50%;
     height: fit-content;
     background-color: #1d1d1d;
@@ -105,18 +108,18 @@ main{
     margin-bottom: 3%;
 }
 .iconPost{
-    width: 7%;;
+    width: 5.8%;;
 }
 .postUserText{
     display: flex;
     flex-direction: column;
     line-height: 100%;
     padding-top: 1%;
-    margin-left: 1%;
+    margin-left: 2%;
 }
 .postUserNome{
-    font-weight: 900;
-    font-size: 1.1em;
+    font-weight: 700;
+    font-size: 1.1vw;
 }
 .postUserHora{
     font-weight: 300;
@@ -125,16 +128,16 @@ main{
 }
 .feedPost h2{
     margin-bottom: 1%;
-    font-size: 1.1vw;
+    font-size: 1.3vw;
 }
 .postTexto{
-    font-size: 0.9em;
+    font-size: 1.2vw;
     color: #9a9a9a;
 }
 .partyList{
     margin-top: 2%;
     display: flex;
-    gap:3%
+    gap:2.5%
 }
 .partyList img:hover{
     cursor: pointer;
@@ -148,6 +151,7 @@ main{
     display: flex;
     align-items: center;
     gap: 0.5vw;
+    font-weight: 200;
 }
 .postInteracaoIcon{
     font-size: 1.6vw;

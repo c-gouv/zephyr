@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <img src="./assets/img/logoExtendVerde.png" class="headerLogo">
+        <img src="./assets/img/logo.svg" class="headerLogo">
         <div class="barraPesquisa">
             <i class="fa-solid fa-magnifying-glass iconPesquisa" style="display: flex;"></i>
             <hr style="height: 100%; width: 2px; background-color: white; border: none;">
@@ -36,9 +36,9 @@
                         <span class="postUserHora">4h atras</span>
                     </div>
                 </div>
-                <div id="postContentContainer">
-                    <h2 id="tituloPost">Alguém me ajuda pelo amor de deus</h2>
-                    <span class="postTexto">No genshin que eu não to conseguindo passar nem com reza braba</span>
+                <div class="postContentContainer">
+                    <h2 class="tituloPost">Alguém me ajuda pelo amor de deus</h2>
+                    <span class="postTexto">No genshin que eu não to conseguindo passar nem com reza brabaNo genshin que eu não to conseguindo passar nem com reza brabaNo genshin que eu não to conseguindo passar nem com reza braba</span>
                     <div class="partyList">
                         <img src="./assets/img/pfpIcon.svg" class="iconPost">
                         <img src="./assets/img/pfpIcon.svg" class="iconPost">
@@ -57,58 +57,70 @@
                 </div>
             </div>
             <hr style="border: 1px solid #0c0c0c;">
+            <div class="feedPost">
+                <div class="postUserInfo">
+                    <img src="./assets/img/pfpIcon.svg" class="iconPost">
+                    <div class="postUserText">
+                        <span class="postUserNome">usuario</span>
+                        <span class="postUserHora">4h atras</span>
+                    </div>
+                </div>
+                <div class="postContentContainer">
+                    <h2 class="tituloPost">Alguém me ajuda pelo amor de deus</h2>
+                    <span class="postTexto">No genshin que eu não to conseguindo passar nem com reza braba</span>
+                    <div class="partyList">
+                        <img src="./assets/img/pfpIcon.svg" class="iconPost">
+                        <img src="./assets/img/pfpIcon.svg" class="iconPost">
+                        <img src="./assets/img/pfpIcon.svg" class="iconPost">
+                        <img src="./assets/img/plusIcon.svg" class="iconPost">
+                        <img src="./assets/img/plusIcon.svg" class="iconPost">
+                    </div>
+                </div>
+                <div class="postInteracao">
+                    <div class="interacao" id="divCurtida">
+                        <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> 300
+                    </div>
+                    <div class="interacao" id="divComent">
+                        <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> 227
+                    </div>
+                </div>
+            </div>
         </div>
+        <div></div>
     </main>
 </body>
 </html>
 
 <script>
-    // MUDAR COR DO TÍTULO -------------------------------------------------------------------------------
-    const conteudoPost = document.getElementById("postContentContainer");
-    conteudoPost.addEventListener("mouseover", evidenciar);
-    conteudoPost.addEventListener("mouseout", retornarNormal)
+    // HOVER CONTEUDO POSTAGEM --------------------------------------------------------------------------
+    const titulosPost = document.querySelectorAll(".postContentContainer");
+    titulosPost.forEach(titulo => {
+        titulo.addEventListener("mouseover", evidenciarTitulo);
+        titulo.addEventListener("mouseout", retornarTitulo);
+    });
 
-    function evidenciar() {
-        const elemento = document.getElementById("tituloPost");
-        elemento.classList.add("evidenciarElementoHover")
+    function evidenciarTitulo(event) {
+        const tituloPost = event.currentTarget.querySelector(".tituloPost");
+        tituloPost.classList.add("evidenciarElementoHover");
     }
-    function retornarNormal() {
-        const elemento = document.getElementById("tituloPost");
-        elemento.classList.remove("evidenciarElementoHover")
+    function retornarTitulo(event) {
+        const tituloPost = event.currentTarget.querySelector(".tituloPost");
+        tituloPost.classList.remove("evidenciarElementoHover");
     }
+    // BOTAO LIKE --------------------------------------------------------------------------------------
+    const botaoLike = document.querySelectorAll(".fa-heart");
+    botaoLike.forEach(like => {
+        like.addEventListener("click", trocarBotaoLike)
+    });
 
-    // MUDAR COR DA DIV ----------------------------------------------------------------------------------
-    const divCurtida = document.getElementById("divCurtida");
-    const divComent = document.getElementById("divComent");
-
-    divCurtida.addEventListener("mouseover", evidenciarContainerCurtida);
-    divCurtida.addEventListener("mouseout", retornarNormalContainerCurtida);
-    function evidenciarContainerCurtida() {
-        divCurtida.classList.add("evidenciarElementoHover")
+    function trocarBotaoLike(e){
+        let icone = e.currentTarget
+        let estadoAtual = icone.classList.contains("fa-regular") ? "fa-regular" : "fa-solid";
+        let novoEstado = estadoAtual === "fa-regular" ? "fa-solid" : "fa-regular";
+        const silva = [novoEstado, "evidenciarEl"]
+        
+        icone.classList.remove(estadoAtual);
+        icone.classList.add(novoEstado);
+        icone.classList.toggle("evidenciarElementoToggle")
     }
-    function retornarNormalContainerCurtida() {
-        divCurtida.classList.remove("evidenciarElementoHover")
-    }
-
-    divComent.addEventListener("mouseover", evidenciarContainerComent);
-    divComent.addEventListener("mouseout", retornarNormalContainerComent);
-    function evidenciarContainerComent() {
-        divComent.classList.add("evidenciarElementoHover")
-    }
-    function retornarNormalContainerComent() {
-        divComent.classList.remove("evidenciarElementoHover")
-    }
-    
-    // CLICK NA CURTIDA/COMENTARIO ------------------------------------------------------------------------
-    const iconCurtida = document.getElementById("iconCurtida");
-        iconCurtida.addEventListener("click", () => {
-            let iconAtual = icon.classList.contains("fa-angle-up") ? "fa-angle-up" : "fa-angle-down";
-            let novoIcon = iconAtual === "fa-angle-up" ? "fa-angle-down" : "fa-angle-up";
-
-            icon.classList.remove(iconAtual);
-            icon.classList.add(novoIcon);
-        })
-
-
-    const iconComent = document.getElementById("iconComent");
 </script>
