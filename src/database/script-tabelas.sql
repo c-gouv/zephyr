@@ -22,7 +22,7 @@ create table usuario(
     foreign key (fkImagem) references imagem(idImagem));
 
 create table post (
-	idPost int auto_increment,
+	idPost int primary key auto_increment,
     fkUsuario int,
     foreign key (fkUsuario) references usuario(idUsuario),
     titulo varchar(50),
@@ -41,3 +41,24 @@ create table comentarioPost (
     foreign key (fkUsuario) references usuario(idUsuario),
     mensagem varchar(250),
     dataHora datetime);
+    
+    select * from usuario;
+    insert into usuario(usuario, email, senha) values
+		("ericoLinguica", "erickLinguica@gmail.com", "abc");
+        
+	insert into post(fkUsuario, titulo, descricao) values
+		(2, "Agora foi KKKKKK", "sei lá mano, mó preg");
+	select * from post;
+    
+            SELECT 
+            p.idPost,
+            p.titulo,
+            p.descricao,
+            p.fkUsuario,
+            u.idUsuario,
+            u.usuario,
+            u.email,
+            u.senha
+        FROM post p
+            INNER JOIN usuario u
+                ON p.fkUsuario = u.idUsuario;
