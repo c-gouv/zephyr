@@ -27,11 +27,23 @@
                 <a>Seguindo</a>
                 <a>Feed</a>
             </div>
-            <div id="feedPost">
-
+            <div id="feedPost"></div>
+        </div>
+        <div class="secondContainer">
+            <span class="secondContainerTitulo">Faça uma postagem!</span>
+            <div style="display: flex;">
+                <div class="secondContainerCard">
+                    <i class="fa-solid fa-pencil"></i>
+                    <span>Texto e<br>
+                    Imagens</span>
+                </div>
+                <div class="secondContainerCard">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Texto e<br>
+                    Imagens</span>
+                </div>
             </div>
-        <div>
-
+            
         </div>
     </main>
 </body>
@@ -123,17 +135,15 @@
         const tituloPost = event.currentTarget.querySelector(".tituloPost");
         tituloPost.classList.remove("evidenciarElementoHover");
     }
-    // BOTAO LIKE --------------------------------------------------------------------------------------
-    
 
+    // BOTAO LIKE --------------------------------------------------------------------------------------
     function trocarBotaoLike(e){
         let icone = e.currentTarget
         let estadoAtual = icone.classList.contains("fa-regular") ? "fa-regular" : "fa-solid";
         let novoEstado = estadoAtual === "fa-regular" ? "fa-solid" : "fa-regular";
-        // const silva = [novoEstado, "evidenciarEl"]
         
         icone.classList.remove(estadoAtual);
         icone.classList.add(novoEstado);
-        icone.classList.toggle("evidenciarElementoToggle")
+        icone.classList.toggle("evidenciarElementoHover")
     }
 </script>

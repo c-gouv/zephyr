@@ -68,9 +68,11 @@ header{
     font-size: 25px;
     display: flex;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 .iconSino:hover{
     color: #00fa38;
+    cursor: pointer;
 }
 .iconPfp{
     height: 70%;
@@ -79,6 +81,7 @@ header{
 main{
     display: flex;
     justify-content: center;
+    gap: 2%;
 }
 .feed{
     margin-top: 2%;
@@ -97,7 +100,7 @@ main{
 .feedSection a{
     margin-left: 4%;
     font-family: 'Khula', sans-serif;
-    font-weight: 900;
+    font-weight: 800;
 }
 /* POST ------------------------------------------------------- */
 .feedPost{
@@ -161,18 +164,51 @@ main{
 }
 .postContentContainer{
     width: 100%;
+    cursor: pointer;
 }
 .evidenciarElementoHover{
-    cursor: pointer;
     color: #00fa38;
 }
-.evidenciarElementoToggle{
-    color: #00fa38;
-}
-/* Escrever Post */
 .fa-heart{
     cursor: pointer;
 }
 .fa-comments{
     cursor: pointer;
+}
+/* CONTAINER DA DIREITA ---------------------------------------- */
+.secondContainer{
+    background-color: #1d1d1d;
+    flex-direction: column;
+    align-items: start;
+    border-radius: 2vw;
+    margin-top: 2%;
+    padding: 1.5%;
+    color: white;
+    display: flex;
+    width: 12.5%;
+}
+.secondContainerCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 9% 10%;
+    width: max-content;
+    border-radius: 2vw;
+}
+.secondContainerCard:hover{
+    background-color: #373737;
+    cursor: pointer;
+}
+.secondContainerCard i{
+    background-color: #00fa38;
+    padding: 15%;
+    font-size: 150%;
+    border-radius: 10vw;
+    color: black;
+    margin-bottom: 10%;
+}
+.secondContainerTitulo{
+    font-weight: 800;
+    font-family: 'Khula', sans-serif;
 }
