@@ -1,3 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Lexend+Deca:wght@100..900&family=Lilita+One&display=swap');
 *{
     margin: 0
+}
+hr{
+    background-color: transparent;
+    border: 1px solid #0c0c0c;
+}
+main{
+    font-family: 'Lexend Deca', sans-serif;
+    margin-inline: auto;
+    margin-top: 2%;
+    width: 60%;
+    height: fit-content;
+    background-color: #1d1d1d;
+    border-radius: 2vw;
+    color: white;
+}
+.post-retornar{
+    padding-inline: 5%;
+    padding-block: 1.5%;
+    font-weight: 800;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.autor-user-info{
+    margin: 2.5% 0 2% 0 ;
+    padding-inline: 5%;
+    display: flex;
+    align-items: center;
+    gap: 1.5%;
+}
+.autor-pfp{
+    width: 7%;
+}
+#autor_nome{
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+#hora_post{
+    font-weight: 100;
+    font-size: 0.9rem;
+}
+.postContentContainer{
+    margin-inline: 5%;
+    margin-bottom: 2%;
+}
+#conteudo_post{
+    font-weight: 200;
+    word-wrap: break-word;
+}
+.partyList{
+    margin-top: 2.5%;
+    display: flex;
+    flex-direction: column;
+}
+.partyUserIcon{
+    width: 50px;
+}
+.interacao-container{
+    display: flex;
+    margin: auto;
+    gap:20%;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+.interacao-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 200;
+}
+.interacao-box i{
+    font-size: 2rem;
+}
+.comentar-container{
+    padding-inline: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+#input_comentario{
+    color: white;
+    font-size: 0.9rem;
+    padding: 1%;
+    max-height: 10%;
+    width: 99%;
+    background: transparent;
+    outline: none;
+    border: 2px solid #0c0c0c;
+    border-radius: 1vw;
+    resize: none;
+    margin-top: 2%;
+}
+.enviar-botao{
+    width: max-content;
+    font-size: 1rem;
+    padding: 0.9% 3%;
+    border-radius: 0.7vw;
+    border: none;
+    font-weight: 800;
+    margin-top: 1%;
+    background-color: #00fa38;
+    color: #0c0c0c;
+}
+#input_comentario{
+    font-family: 'Lexand Deca', sans-serif;
+    font-weight: 200;
+}
+/* COMENTARIO ------------------------------------------ */
+.comentario-container {
+    
 }

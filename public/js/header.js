@@ -11,3 +11,7 @@
         <img src="./assets/img/pfpIcon.svg" class="iconPfp">
     </div>`
 })();
+
+function resetarFeed(){
+    window.location = "./home.html"
+}

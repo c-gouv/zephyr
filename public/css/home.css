@@ -102,6 +102,10 @@ main{
 .fa-comments{
     cursor: pointer;
 }
+#feedPost{
+    display: flex;
+    flex-direction: column-reverse;
+}
 /* CONTAINER DA DIREITA ---------------------------------------- */
 .secondContainer{
     background-color: #1d1d1d;

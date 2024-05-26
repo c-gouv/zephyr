@@ -11,6 +11,52 @@
 
 <body>
     <header id="headerPadrao"></header>
+    <main>
+        <div class="post-retornar">
+            <i class="fa-solid fa-angle-left"></i>
+            Post
+        </div>
+        <hr>
+        <div>
+            <div class="autor-user-info">
+                <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
+                <div>
+                    <span id="autor_nome">Jucelino</span><br>
+                    <span id="hora_post">4h</span>
+                </div>
+            </div>
+            <div class="postContentContainer">
+                <h1 id="titulo_post">Alguém me ajuda pelo amor de Deus</h1>
+                <span id="conteudo_post">To precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza brabaTo precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza brabaTo precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza braba</span>
+                <div class="partyList">
+                    <h3>Participantes:</h3>
+                    <div style="display: flex; gap: 20px;">
+                        <div id="user1"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
+                        <div id="user2"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
+                        <div id="user3"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
+                        <div id="user4"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
+                        <div id="user5"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="interacao-container">
+                <div class="interacao-box">
+                    <i class="fa-regular fa-heart" id="iconCurtida"></i> 300
+                </div>
+                <div class="interacao-box">
+                    <i class="fa-regular fa-comments" id="iconComent"></i> 227
+                </div>
+            </div>
+            <div class="comentar-container">
+                <textarea id="input_comentario" placeholder="Comente você também!"></textarea>
+                <button class="enviar-botao">Enviar</button>
+            </div>
+        </div>
+        <hr>
+        <div id="sessao_comentario">
+            
+        </div>
+    </main>
 </body>
 
 <script src="./js/header.js"></script>
