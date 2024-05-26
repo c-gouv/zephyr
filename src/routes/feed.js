@@ -11,9 +11,9 @@ router.get("/listar", function (req, res) {
 //     feedController.pesquisarDescricao(req, res);
 // });
 
-// router.post("/publicar/:idUsuario", function (req, res) {
-//     feedController.publicar(req, res);
-// });
+router.post("/publicar/:idUsuario", function (req, res) {
+    feedController.publicar(req, res);
+});
 
 // router.delete("/deletar/:idAviso", function (req, res) {
 //     feedController.deletar(req, res);

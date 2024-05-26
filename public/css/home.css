@@ -24,6 +24,7 @@ header{
 }
 .headerLogo{
     height: 45px;
+    cursor: pointer;
 }
 /* BARRA PESQUISA--------------------------------------------------- */
 .barraPesquisa{
@@ -84,7 +85,7 @@ main{
     gap: 2%;
 }
 .feed{
-    margin-top: 2%;
+    margin-block: 2%;
     width: 50%;
     height: fit-content;
     background-color: #1d1d1d;
@@ -106,6 +107,7 @@ main{
 .feedPost{
     padding:3% 2%;
     color: white;
+    border-bottom: 1px solid #0c0c0c;
 }
 .postUserInfo{
     align-items: center;
@@ -185,14 +187,17 @@ main{
     padding: 1.5%;
     color: white;
     display: flex;
-    width: 12.5%;
+    /* width: 13%; */
+    height: fit-content;
+    position: sticky;
+    top: 10%;
 }
 .secondContainerCard{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 9% 10%;
+    padding: 0.9em 1em;
     width: max-content;
     border-radius: 2vw;
 }
@@ -212,3 +217,86 @@ main{
     font-weight: 800;
     font-family: 'Khula', sans-serif;
 }
+/* MODA PUBLICAR ----------------------------------------------------- */
+.modalPublicar{
+    position: fixed;
+    width: 60vw;
+    height: 80vh;
+    background-color: white;
+    border-radius: 1.5vw;
+    margin-top: 2%;
+    box-sizing: border-box;
+    display: none;
+}
+.modalPublicarTitulo{
+    padding: 1% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modalPublicarTitulo i{
+    font-size: 1.7em;
+    height: 100%;
+    margin-top: auto;
+}
+.modalPublicarTitulo i:hover{
+    color: #00fa38;
+    cursor: pointer;
+}
+.modalPublicarContent{
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.modalPublicarContent button{
+    width: fit-content;
+    padding: 1% 2.5%;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 1vw;
+    border: 0.2vh solid #0c0c0c;
+    cursor: pointer;
+    align-self: center;
+}
+.titulo-container{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}
+.modal-post-title{
+    padding: 1.5% 1%;
+    font-size: 16px;
+    border-radius: 1vw;
+    border: 1px solid #0c0c0c;
+    outline: none;
+}
+.modal-post-title:focus{
+    border-color:#00fa38;
+}
+.modal-post-title::placeholder{
+    font-size: 0.85rem;
+}
+.conteudo-container{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}
+.modal-post-content{
+    border-radius: 1vw;
+    border: 1px solid #0c0c0c;
+    font-size: 16px;
+    padding: 1.5% 1%;
+    font-family: "Lexand Deca", sans-serif;
+    outline: none;
+}
+.modal-post-content:focus{
+    border-color: #00fa38;
+}
+.img-uploader{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}
+/* .modal-post-img{
+} */

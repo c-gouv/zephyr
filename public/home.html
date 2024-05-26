@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="./css/home.css">
     <link rel="shortcut icon" href="./assets/img/logo.ico">
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+    <script src="./js/sessao.js"></script>
 </head>
-<body onload="atualizarFeed()">
+<body onload="atualizarFeed(), validarSessao()">
     <header>
         <img src="./assets/img/logo.svg" class="headerLogo" onclick="resetarFeed()">
         <div class="barraPesquisa">
@@ -32,18 +33,39 @@
         <div class="secondContainer">
             <span class="secondContainerTitulo">Faça uma postagem!</span>
             <div style="display: flex;">
-                <div class="secondContainerCard">
+                <div class="secondContainerCard" id="publicarModalTexto" onclick="abrirModal()">
                     <i class="fa-solid fa-pencil"></i>
                     <span>Texto e<br>
                     Imagens</span>
                 </div>
                 <div class="secondContainerCard">
                     <i class="fa-solid fa-image"></i>
-                    <span>Texto e<br>
-                    Imagens</span>
+                    <span>Imagens</span>
                 </div>
             </div>
             
+        </div>
+        <div class="modalPublicar" id="modalPublicar">
+            <div class="modalPublicarTitulo">
+                <h2>Publicar</h2>
+                <i class="fa-regular fa-circle-xmark" onclick="fecharModal()" id="iconFecharModal"></i>
+            </div>
+            <hr>
+            <div class="modalPublicarContent">
+                <div class="titulo-container">
+                    Título
+                    <input id="publicarTitulo" type="text" required class="modal-post-title" placeholder="Insira o título (Obrigatório)">
+                </div>
+                <div class="conteudo-container">
+                    Conteúdo
+                    <textarea id="publicarTexto" class="modal-post-content"></textarea>
+                </div>
+                <div class="img-uploader">
+                    Imagem
+                    <input type="file" class="modal-post-img">
+                </div>
+                <button onclick="publicar()">Enviar</button>
+            </form>
         </div>
     </main>
 </body>
@@ -98,8 +120,7 @@
                                     <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> 227
                                 </div>
                             </div>
-                        </div>
-                        <hr style="border: 1px solid #0c0c0c;">`
+                        </div>`
                     }
                     allTools();
                 });
@@ -122,7 +143,6 @@
             like.addEventListener("click", trocarBotaoLike)
         });
     }
-
     function resetarFeed(){
         window.location.reload()
     }
@@ -130,12 +150,10 @@
         const tituloPost = event.currentTarget.querySelector(".tituloPost");
         tituloPost.classList.add("evidenciarElementoHover");
     }
-
     function retornarTitulo(event) {
         const tituloPost = event.currentTarget.querySelector(".tituloPost");
         tituloPost.classList.remove("evidenciarElementoHover");
     }
-
     // BOTAO LIKE --------------------------------------------------------------------------------------
     function trocarBotaoLike(e){
         let icone = e.currentTarget
@@ -145,5 +163,52 @@
         icone.classList.remove(estadoAtual);
         icone.classList.add(novoEstado);
         icone.classList.toggle("evidenciarElementoHover")
+    }
+    // PUBLICAR ----------------------------------------------------------------------------------------
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        const tituloPost = publicarTitulo.value
+        const conteudoPost = publicarTexto.value
+
+        var corpo = {
+            titulo: tituloPost,
+            conteudo: conteudoPost
+        }
+
+        fetch(`/feed/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "/home.html";
+                // limparFormulario();
+                // finalizarAguardar();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+        return false;
+    }
+    // FECHAR/ABRIR PUBLICAR ---------------------------------------------------------------------------
+    function abrirModal(){
+        const modalPublicarTexto = document.getElementById("modalPublicar")
+        modalPublicarTexto.style.display = 'block'
+    }
+    function fecharModal(){
+        const modalPublicarTexto = document.getElementById("modalPublicar")
+        modalPublicarTexto.style.display = 'none'
+
     }
 </script>
