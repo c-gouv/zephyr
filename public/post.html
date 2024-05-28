@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/post.css">
+    <link rel="shortcut icon" href="./assets/img/logo.svg">
     <title>Zephyr | Post</title>
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+    <script src="./js/sessao.js"></script>
 </head>
 
-<body>
+<body onload="carregarPost(), validarSessao()">
     <header id="headerPadrao"></header>
     <main>
-        <div class="post-retornar">
+        <div class="post-retornar" onclick="voltarHome()">
             <i class="fa-solid fa-angle-left"></i>
             Post
         </div>
@@ -21,14 +23,14 @@
             <div class="autor-user-info">
                 <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
                 <div>
-                    <span id="autor_nome">Jucelino</span><br>
+                    <span id="autor_nome"></span><br>
                     <span id="hora_post">4h</span>
                 </div>
             </div>
             <div class="postContentContainer">
-                <h1 id="titulo_post">Alguém me ajuda pelo amor de Deus</h1>
-                <span id="conteudo_post">To precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza brabaTo precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza brabaTo precisando de um pessoal pra matar um boss no genshin que eu não to conseguindo passar nem com reza braba</span>
-                <div class="partyList">
+                <h1 id="titulo_post"></h1>
+                <span id="conteudo_post"></span>
+                <!-- <div class="partyList">
                     <h3>Participantes:</h3>
                     <div style="display: flex; gap: 20px;">
                         <div id="user1"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
@@ -38,7 +40,7 @@
                         <div id="user5"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="interacao-container">
                 <div class="interacao-box">
                     <i class="fa-regular fa-heart" id="iconCurtida"></i> 300
@@ -60,4 +62,43 @@
 </body>
 
 <script src="./js/header.js"></script>
+<script src="./js/allTools.js"></script>
 </html>
+
+<script>
+    var idUsuario = sessionStorage.ID_USUARIO;
+    const params = new URLSearchParams(window.location.search)
+    const idPost = params.get('id');
+
+    function carregarPost() {
+        fetch(`/post/carregarPost/${idPost}/${idUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var post = resposta[i];
+
+                        autor_nome.innerHTML = post.usuario;
+                        titulo_post.innerHTML = post.titulo;
+                        conteudo_post.innerHTML = post.descricao;
+                        document.title = `Zephyr | Post de ${post.usuario}`
+                    }
+                    // allTools();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+</script>

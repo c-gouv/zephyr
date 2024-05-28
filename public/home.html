@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
     <script src="./js/sessao.js"></script>
 </head> 
-<body onload="atualizarFeed()">
+<body onload="atualizarFeed(), validarSessao()">
     <header id="headerPadrao"></header>
     <main>
         <div class="feed" id="feed_container">
@@ -60,10 +60,11 @@
     </main>
 </body>
 <script src="./js/header.js"></script>
+<script src="./js/allTools.js"></script>
 </html>
 
 <script>
-    // CARREGAR FEED ---------------------------------------------------------------------------------
+    // CARREGAR FEED ------------------------------------------------------------------------------------
     function atualizarFeed() {
         fetch("/feed/listar").then(function (resposta) {
             if (resposta.ok) {
@@ -92,7 +93,7 @@
                                     <span class="postUserHora">4h atras</span>
                                 </div>
                             </div>
-                            <div class="postContentContainer">
+                            <div class="postContentContainer" onclick="abrirPost(${post.idPost})">
                                 <h2 class="tituloPost">${post.titulo}</h2>
                                 <span class="postTexto">${post.descricao}</span>
                                 <div class="partyList">
@@ -121,36 +122,6 @@
         }).catch(function (resposta) {
             console.error(resposta);
         });
-    }
-    // HOVER CONTEUDO POSTAGEM --------------------------------------------------------------------------
-    function allTools() {
-        const titulosPost = document.querySelectorAll(".postContentContainer");
-        titulosPost.forEach(titulo => {
-            titulo.addEventListener("mouseover", evidenciarTitulo);
-            titulo.addEventListener("mouseout", retornarTitulo);
-        });
-        const botaoLike = document.querySelectorAll(".fa-heart");
-        botaoLike.forEach(like => {
-            like.addEventListener("click", trocarBotaoLike)
-        });
-    }
-    function evidenciarTitulo(event) {
-        const tituloPost = event.currentTarget.querySelector(".tituloPost");
-        tituloPost.classList.add("evidenciarElementoHover");
-    }
-    function retornarTitulo(event) {
-        const tituloPost = event.currentTarget.querySelector(".tituloPost");
-        tituloPost.classList.remove("evidenciarElementoHover");
-    }
-    // BOTAO LIKE --------------------------------------------------------------------------------------
-    function trocarBotaoLike(e){
-        let icone = e.currentTarget
-        let estadoAtual = icone.classList.contains("fa-regular") ? "fa-regular" : "fa-solid";
-        let novoEstado = estadoAtual === "fa-regular" ? "fa-solid" : "fa-regular";
-        
-        icone.classList.remove(estadoAtual);
-        icone.classList.add(novoEstado);
-        icone.classList.toggle("evidenciarElementoHover")
     }
     // PUBLICAR ----------------------------------------------------------------------------------------
     function publicar() {
@@ -197,6 +168,9 @@
     function fecharModal(){
         const modalPublicarTexto = document.getElementById("modalPublicar")
         modalPublicarTexto.style.display = 'none'
-
+    }
+    // ABRIR POST --------------------------------------------------------------------------------------
+    function abrirPost(id){
+        window.location = `/post.html?id=${id}`
     }
 </script>

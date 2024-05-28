@@ -1,6 +1,6 @@
 (() => {
     document.getElementById("headerPadrao").innerHTML = `
-    <img src="./assets/img/logo.svg" class="headerLogo" onclick="resetarFeed()">
+    <img src="./assets/img/logo.svg" class="headerLogo" onclick="voltarHome()">
     <div class="barraPesquisa">
         <i class="fa-solid fa-magnifying-glass iconPesquisa" style="display: flex;"></i>
         <hr style="height: 100%; width: 2px; background-color: white; border: none;">
@@ -12,6 +12,6 @@
     </div>`
 })();
 
-function resetarFeed(){
+function voltarHome(){
     window.location = "./home.html"
 }
