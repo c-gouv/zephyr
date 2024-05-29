@@ -127,11 +127,10 @@ main{
 }
 .box-comentario-foto{
     height: max-content;
-    width: 25%;
     margin-right: 1.5%;
 }
 .box-comentario-foto img{
-    width: 100%;
+    width: 3vw;
 }
 .box-comentario-conteudo{
     margin-top: 0.3%;

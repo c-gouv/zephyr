@@ -33,7 +33,7 @@ create table post (
     foreign key (fkImagem) references imagem(idImagem));
     
 create table comentarioPost (
-	idComentario int,
+	idComentario int auto_increment,
     fkPost int,
     fkUsuario int,
     primary key	(idComentario, fkPost, fkUsuario),
@@ -42,23 +42,45 @@ create table comentarioPost (
     mensagem varchar(250),
     dataHora datetime);
     
-select * from usuario;
+select * from comentarioPost;
 insert into usuario(usuario, email, senha) values
-		("ericoLinguica", "erickLinguica@gmail.com", "abc");
+	("ericoLinguica", "erickLinguica@gmail.com", "abc");
 
 insert into post(fkUsuario, titulo, descricao) values
-		(1, "banana", "iahowiahdaiwhdiuawhdiuh");
+	(1, "banana", "iahowiahdaiwhdiuawhdiuh");
         
+insert into comentarioPost(fkPost, fkUsuario, mensagem, dataHora) values
+	(1, 1, "banana ao quadrado parceirinho", now());
+
 select * from post;
-        SELECT 
-            p.idPost,
-            p.titulo,
-            p.descricao,
-            p.fkUsuario,
+SELECT 
+            c.idComentario,
+            c.fkPost,
+            c.fkUsuario,
+            c.dataHora,
+            c.mensagem,
             u.idUsuario,
-            u.usuario,
-            (SELECT count(idComentario) FROM comentarioPost RIGHT JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
-            p.curtida
-        FROM post p
-            JOIN usuario u
-                ON p.fkUsuario = u.idUsuario;
+            u.usuario
+        FROM 
+            comentarioPost as c
+            JOIN post as p
+                ON c.fkPost = p.idPost
+            JOIN usuario as u
+                ON c.fkUsuario = u.idUsuario
+        WHERE p.idPost = 1 ORDER BY c.dataHora DESC;
+        
+                SELECT 
+            c.idComentario,
+            c.fkPost,
+            c.fkUsuario,
+            c.dataHora,
+            c.mensagem,
+            u.idUsuario,
+            u.usuario
+        FROM 
+            comentarioPost as c
+            JOIN post as p
+                ON c.fkPost = p.idPost
+            JOIN usuario as u
+                ON c.fkUsuario = u.idUsuario
+        WHERE p.idPost = 1 ORDER BY c.dataHora DESC

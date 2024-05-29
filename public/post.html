@@ -58,17 +58,7 @@
         <hr>
         <div class="comentarios-container">
             <h2>Comentários</h2>
-            <div id="sessao_comentario">
-                <div class="box-comentario">
-                    <div class="box-comentario-foto">
-                        <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
-                    </div>
-                    <div class="box-comentario-conteudo">
-                        <span id="autor_comentario_nome">Joselino</span>
-                        <span id="comentario_content">e você procura por uma sobremesa encantadora e repleta de frescor, a torta de morango é a escolha ideal! Esta receita combina a doçura dos morangos frescos com a cremosidade do recheio e a crocância da massa, proporcionando uma experiência única para os apreciadores de doces. Com ingredientes simples, como morangos, gelatina, leite condensado e creme de leite, essa torta se destaca pela facilidade no preparo e pelo resultado surpreendente</span>
-                    </div>
-                </div>
-            </div>
+            <div id="sessao_comentario" id="sessao_comentario"></div>
         </div>
     </main>
 </body>
@@ -82,19 +72,37 @@
     const params = new URLSearchParams(window.location.search)
     const idPost = params.get('id');
 
+    let dadosPostagens = '';
+    let comentarios = '';
+
     function carregarPost() {
         fetch(`/post/carregarPost/${idPost}/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
-                resposta.json().then(function (resposta) {
+                resposta.json().then(function (resposta) { 
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                        var post = resposta[idPost-1];
-                        document.title = `Zephyr | Post de ${post.usuario}`
-                        
-                        autor_nome.innerHTML = post.usuario;
-                        titulo_post.innerHTML = post.titulo;
-                        conteudo_post.innerHTML = post.descricao;
-                        span_qtdCurtidas.innerHTML = post.qtdCurtidas;
-                        span_qtdComentarios.innerHTML = post.qtdComentarios;
+                    post = resposta.postagem[0];
+                    comentarios = resposta.comentarios;
+                    // curtidas = resposta.curtidas;
+                    document.title = `Zephyr | Post de ${post.usuario}`
+                    
+                    autor_nome.innerHTML = post.usuario;
+                    titulo_post.innerHTML = post.titulo;
+                    conteudo_post.innerHTML = post.descricao;
+                    span_qtdCurtidas.innerHTML = post.qtdCurtidas;
+                    span_qtdComentarios.innerHTML = post.qtdComentarios;
+                
+                    comentarios.map(comentario => {
+                        sessao_comentario.innerHTML += `
+                            <div class="box-comentario">
+                                <div class="box-comentario-foto">
+                                    <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
+                                </div>
+                                <div class="box-comentario-conteudo">
+                                    <span id="autor_comentario_nome">${comentario.usuario}</span>
+                                    <span id="comentario_content">${comentario.mensagem}</span>
+                                </div>
+                            </div>`
+                    });
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -103,5 +111,4 @@
             console.error(resposta);
         });
     }
-
 </script>
