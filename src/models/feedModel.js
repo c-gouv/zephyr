@@ -10,11 +10,11 @@ function listar() {
             p.fkUsuario,
             u.idUsuario,
             u.usuario,
-            u.email,
-            u.senha
+            (SELECT COALESCE(count(idComentario)) FROM comentarioPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
+            COALESCE(p.curtida, 0) as qtdCurtidas
         FROM post p
-            INNER JOIN usuario u
-                ON p.fkUsuario = u.idUsuario;
+            JOIN usuario u
+                ON p.fkUsuario = u.idUsuario
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

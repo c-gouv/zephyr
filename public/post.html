@@ -11,8 +11,9 @@
     <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="carregarPost(), validarSessao()">
+<body onload="carregarPost()">
     <header id="headerPadrao"></header>
+    <div id="modal_perfil"></div>
     <main>
         <div class="post-retornar" onclick="voltarHome()">
             <i class="fa-solid fa-angle-left"></i>
@@ -43,10 +44,10 @@
             </div> -->
             <div class="interacao-container">
                 <div class="interacao-box">
-                    <i class="fa-regular fa-heart" id="iconCurtida"></i> 300
+                    <i class="fa-regular fa-heart" id="iconCurtida"></i> <span id="span_qtdCurtidas"></span>
                 </div>
                 <div class="interacao-box">
-                    <i class="fa-regular fa-comments" id="iconComent"></i> 227
+                    <i class="fa-regular fa-comments" id="iconComent"></i> <span id="span_qtdComentarios"></span>
                 </div>
             </div>
             <div class="comentar-container">
@@ -55,8 +56,19 @@
             </div>
         </div>
         <hr>
-        <div id="sessao_comentario">
-            
+        <div class="comentarios-container">
+            <h2>Comentários</h2>
+            <div id="sessao_comentario">
+                <div class="box-comentario">
+                    <div class="box-comentario-foto">
+                        <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
+                    </div>
+                    <div class="box-comentario-conteudo">
+                        <span id="autor_comentario_nome">Joselino</span>
+                        <span id="comentario_content">e você procura por uma sobremesa encantadora e repleta de frescor, a torta de morango é a escolha ideal! Esta receita combina a doçura dos morangos frescos com a cremosidade do recheio e a crocância da massa, proporcionando uma experiência única para os apreciadores de doces. Com ingredientes simples, como morangos, gelatina, leite condensado e creme de leite, essa torta se destaca pela facilidade no preparo e pelo resultado surpreendente</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
@@ -73,26 +85,16 @@
     function carregarPost() {
         fetch(`/post/carregarPost/${idPost}/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
-
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    for (let i = 0; i < resposta.length; i++) {
-                        var post = resposta[i];
-
+                        var post = resposta[idPost-1];
+                        document.title = `Zephyr | Post de ${post.usuario}`
+                        
                         autor_nome.innerHTML = post.usuario;
                         titulo_post.innerHTML = post.titulo;
                         conteudo_post.innerHTML = post.descricao;
-                        document.title = `Zephyr | Post de ${post.usuario}`
-                    }
-                    // allTools();
+                        span_qtdCurtidas.innerHTML = post.qtdCurtidas;
+                        span_qtdComentarios.innerHTML = post.qtdComentarios;
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -101,4 +103,5 @@
             console.error(resposta);
         });
     }
+
 </script>

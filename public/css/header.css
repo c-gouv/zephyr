@@ -10,12 +10,14 @@ body{
 header{
     background-color: #1d1d1d;
     justify-content: space-between;
-    height: 8vh;
-    display: flex;
-    padding: 10px 5%;
     align-items: center;
     position: sticky;
+    padding: 10px 5%;
+    display: flex;
+    height: 8vh;
+    z-index: 3;
     top: 0;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.377);
 }
 .headerLogo{
     height: 45px;
@@ -23,12 +25,12 @@ header{
 }
 /* BARRA PESQUISA--------------------------------------------------- */
 .barraPesquisa{
-    display: flex;
-    width: 45%;
-    height: 56%;
-    align-items: center;
     border: 2px solid white;
+    align-items: center;
     border-radius: 10vw;
+    display: flex;
+    height: 56%;
+    width: 45%;
 }
 .iconPesquisa{
     height: 100%;
@@ -72,4 +74,45 @@ header{
 }
 .iconPfp{
     height: 70%;
+    cursor: pointer;
+}
+/* MODAL USUARIO --------------------------------------------------------- */
+.modal-perfil-container{
+    position: fixed;
+    right: 4%;
+    top: -15%;
+    width: 20vw;
+    height: 10vw;
+    background-color: #1d1d1d;
+    z-index: 2;
+    border-radius: 0 0 2vw 2vw;
+    border-inline: 1px solid white;
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    gap: 15%;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 50px 0 rgb(0, 0, 0, 0.5);
+    transition: top 0.5s ease;
+}
+.modal-perfil-option{
+    color: white;
+    font-size: 1rem;
+    border-radius: 1vw;
+    height: 41%;
+    width: 90%;
+    padding-left: 10%;
+    align-items: center;
+    display: flex;
+    gap: 10%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.modal-perfil-option:hover{
+    background-color: #0c0c0ca9;
+    transition: background-color 0.2s ease;
+}
+.ativo{
+    top: 10%;
 }

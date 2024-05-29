@@ -12,6 +12,7 @@
 </head> 
 <body onload="atualizarFeed(), validarSessao()">
     <header id="headerPadrao"></header>
+    <div id="modal_perfil"></div>
     <main>
         <div class="feed" id="feed_container">
             <div class="feedSection">
@@ -106,10 +107,10 @@
                             </div>
                             <div class="postInteracao">
                                 <div class="interacao" id="divCurtida">
-                                    <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> 300
+                                    <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> ${post.qtdCurtidas}
                                 </div>
                                 <div class="interacao" id="divComent">
-                                    <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> 227
+                                    <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> ${post.qtdComentarios}
                                 </div>
                             </div>
                         </div>`

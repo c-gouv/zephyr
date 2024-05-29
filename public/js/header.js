@@ -8,10 +8,28 @@
     </div>
     <div class="headerUserArea">
         <i class="fa-regular fa-bell iconSino"></i>
-        <img src="./assets/img/pfpIcon.svg" class="iconPfp">
+        <img src="./assets/img/pfpIcon.svg" class="iconPfp" onclick="toggleModalPerfil()">
+    </div>`
+})();
+
+(() => {
+    document.getElementById("modal_perfil").innerHTML = `
+    <div class="modal-perfil-container" id="modal-perfil">
+        <div class="modal-perfil-option">
+            <i class="fa-solid fa-user"></i> PERFIL
+        </div>
+        <div class="modal-perfil-option" onclick="limparSessao()">
+            <i class="fa-solid fa-right-from-bracket"></i>SAIR
+        </div>
     </div>`
 })();
 
 function voltarHome(){
     window.location = "./home.html"
+}
+
+// PUXAR MODAL ------------------------------------------------------------
+function toggleModalPerfil(){
+    const modal = document.getElementById("modal-perfil");
+    modal.classList.toggle("ativo")
 }

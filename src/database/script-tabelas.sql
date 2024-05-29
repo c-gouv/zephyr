@@ -50,3 +50,15 @@ insert into post(fkUsuario, titulo, descricao) values
 		(1, "banana", "iahowiahdaiwhdiuawhdiuh");
         
 select * from post;
+        SELECT 
+            p.idPost,
+            p.titulo,
+            p.descricao,
+            p.fkUsuario,
+            u.idUsuario,
+            u.usuario,
+            (SELECT count(idComentario) FROM comentarioPost RIGHT JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
+            p.curtida
+        FROM post p
+            JOIN usuario u
+                ON p.fkUsuario = u.idUsuario;
