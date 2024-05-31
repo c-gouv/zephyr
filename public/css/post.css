@@ -108,14 +108,19 @@ main{
     margin-top: 1%;
     background-color: #00fa38;
     color: #0c0c0c;
+    opacity: 0.3;
 }
 #input_comentario{
     font-family: 'Lexand Deca', sans-serif;
     font-weight: 200;
 }
 /* COMENTARIO ------------------------------------------ */
+#sessao_comentario{
+    display: flex;
+    flex-direction: column-reverse;
+}
 .comentarios-container {
-    height: max-content;
+    min-height: 7vh;
     padding-inline: 2%;
 }
 .comentarios-container h2{
@@ -145,4 +150,8 @@ main{
 }
 #comentario_content{
     font-weight: 200;
+}
+
+.btn-on{
+    opacity: 1;
 }

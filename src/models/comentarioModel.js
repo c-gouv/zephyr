@@ -9,7 +9,7 @@ function carregarComentarioPost(idPost) {
             c.dataHora,
             c.mensagem,
             u.idUsuario,
-            u.usuario
+            u.nomeUsuario
         FROM 
             comentarioPost as c
             JOIN post as p
@@ -22,6 +22,17 @@ function carregarComentarioPost(idPost) {
     return database.executar(instrucaoSql);
 }
 
+function publicarComentario(idPost, usuario, mensagem) {
+    var instrucaoSql = `
+        insert into comentarioPost(fkPost, fkUsuario, mensagem, dataHora) values
+            (${idPost}, ${usuario}, '${mensagem}', now());
+        `;
+  
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    carregarComentarioPost
+    carregarComentarioPost,
+    publicarComentario
 }

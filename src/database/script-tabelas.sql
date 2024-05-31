@@ -15,7 +15,7 @@ create table imagem(
 
 create table usuario(
 	idUsuario int primary key auto_increment,
-    usuario varchar(45) unique,
+    nomeUsuario varchar(45) unique,
     email varchar(255) unique,
     senha varchar(45),
     fkImagem int,
@@ -43,6 +43,7 @@ create table comentarioPost (
     dataHora datetime);
     
 select * from comentarioPost;
+select * from usuario;
 insert into usuario(usuario, email, senha) values
 	("ericoLinguica", "erickLinguica@gmail.com", "abc");
 
@@ -51,36 +52,3 @@ insert into post(fkUsuario, titulo, descricao) values
         
 insert into comentarioPost(fkPost, fkUsuario, mensagem, dataHora) values
 	(1, 1, "banana ao quadrado parceirinho", now());
-
-select * from post;
-SELECT 
-            c.idComentario,
-            c.fkPost,
-            c.fkUsuario,
-            c.dataHora,
-            c.mensagem,
-            u.idUsuario,
-            u.usuario
-        FROM 
-            comentarioPost as c
-            JOIN post as p
-                ON c.fkPost = p.idPost
-            JOIN usuario as u
-                ON c.fkUsuario = u.idUsuario
-        WHERE p.idPost = 1 ORDER BY c.dataHora DESC;
-        
-                SELECT 
-            c.idComentario,
-            c.fkPost,
-            c.fkUsuario,
-            c.dataHora,
-            c.mensagem,
-            u.idUsuario,
-            u.usuario
-        FROM 
-            comentarioPost as c
-            JOIN post as p
-                ON c.fkPost = p.idPost
-            JOIN usuario as u
-                ON c.fkUsuario = u.idUsuario
-        WHERE p.idPost = 1 ORDER BY c.dataHora DESC

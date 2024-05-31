@@ -10,7 +10,7 @@
     <img src="./assets/img/fundo.svg" class="fundo">
     <div class="container" id="main">
         <div class="cadastro">
-            <form action="#">
+            <form action="#" onsubmit="cadastrar()">
                 <h1>Crie sua conta</h1>
                 <input id="inputUser" type="text" placeholder="Usuário" required="">
                 <input id="inputEmail" type="email" placeholder="Email" required="">
@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="login">
-            <form action="#">
+            <form action="#" onsubmit="login()">
                 <img src="./assets/img/logoExtend.svg" class="logoLogin">
                 <input id="inputUserEmail" type="email" placeholder="Email" required="">
                 <input id="inputUserSenha" type="password" placeholder="Senha" required="">
@@ -116,17 +116,18 @@
 
             if (resposta.ok) {
                 console.log(resposta);
-
+                console.log(resposta.nomeUsuario)
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.usuario;
                     sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.NOME_USUARIO = json.nomeUsuario;
+
 
                     setTimeout(function () {
                         window.location = "./home.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 1000);
 
                 });
 

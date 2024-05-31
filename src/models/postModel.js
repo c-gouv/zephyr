@@ -7,7 +7,7 @@ function carregarPost(idPost) {
             p.idPost,
             p.titulo,
             p.descricao,
-            u.usuario,
+            u.nomeUsuario,
             (SELECT COALESCE(count(idComentario), 0) FROM comentarioPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
             COALESCE(p.curtida, 0) as qtdCurtidas
         FROM post p
