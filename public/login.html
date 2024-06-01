@@ -10,7 +10,7 @@
     <img src="./assets/img/fundo.svg" class="fundo">
     <div class="container" id="main">
         <div class="cadastro">
-            <form action="#" onsubmit="cadastrar()">
+            <form onsubmit="">
                 <h1>Crie sua conta</h1>
                 <input id="inputUser" type="text" placeholder="Usuário" required="">
                 <input id="inputEmail" type="email" placeholder="Email" required="">
@@ -56,6 +56,11 @@
     botaoLogin.addEventListener('click', () => {
         main.classList.remove("painel-direita-ativo");
     });
+
+    function submitForm(event) {
+         event.preventDefault();
+      }
+    form.addEventListener('submit', submitForm);
 
     // CADASTRAR---------------------------------------------------------------------------------------------------------
 

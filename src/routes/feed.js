@@ -7,9 +7,9 @@ router.get("/listar", function (req, res) {
     feedController.listar(req, res);
 });
 
-// router.get("/pesquisar/:descricao", function (req, res) {
-//     feedController.pesquisarDescricao(req, res);
-// });
+router.get("/listarPorPerfil/:idUsuario", function (req, res) {
+    feedController.listarPorPerfil(req, res);
+});
 
 router.post("/publicar/:idUsuario", function (req, res) {
     feedController.publicar(req, res);

@@ -15,7 +15,7 @@
 (() => {
     document.getElementById("modal_perfil").innerHTML = `
     <div class="modal-perfil-container" id="modal-perfil">
-        <div class="modal-perfil-option">
+        <div class="modal-perfil-option" onclick="irPerfil()">
             <i class="fa-solid fa-user"></i> PERFIL
         </div>
         <div class="modal-perfil-option" onclick="limparSessao()">
@@ -26,6 +26,9 @@
 
 function voltarHome(){
     window.location = "./home.html"
+}
+function irPerfil() {
+    window.location = "./perfil.html"
 }
 
 // PUXAR MODAL ------------------------------------------------------------
