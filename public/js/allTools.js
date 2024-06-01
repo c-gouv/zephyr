@@ -1,4 +1,4 @@
-    // HOVER CONTEUDO POSTAGEM --------------------------------------------------------------------------
+// HOVER CONTEUDO POSTAGEM --------------------------------------------------------------------------
     function allTools() {
         const titulosPost = document.querySelectorAll(".postContentContainer");
         titulosPost.forEach(titulo => {
@@ -18,7 +18,7 @@
         const tituloPost = event.currentTarget.querySelector(".tituloPost");
         tituloPost.classList.remove("evidenciarElementoHover");
     }
-    // BOTAO LIKE --------------------------------------------------------------------------------------
+// BOTAO LIKE --------------------------------------------------------------------------------------
     function trocarBotaoLike(e){
         let icone = e.currentTarget
         let estadoAtual = icone.classList.contains("fa-regular") ? "fa-regular" : "fa-solid";
@@ -28,3 +28,4 @@
         icone.classList.add(novoEstado);
         icone.classList.toggle("evidenciarElementoHover")
     }
+// Tecla ENTER enviar a mensagem

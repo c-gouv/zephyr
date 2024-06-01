@@ -151,7 +151,16 @@ main{
 #comentario_content{
     font-weight: 200;
 }
-
 .btn-on{
     opacity: 1;
+}
+.nenhum-comentario{
+    width: 100%;
+    margin: auto;
+}
+.nenhum-comentario span{
+    display: flex;
+    opacity: 0.3;
+    justify-content: center;
+    margin-bottom: 3%;
 }

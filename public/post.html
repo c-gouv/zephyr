@@ -11,7 +11,7 @@
     <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="carregarPost()">
+<body onload="carregarPost(), validarSessao()">
     <header id="headerPadrao"></header>
     <div id="modal_perfil"></div>
     <main>
@@ -58,7 +58,9 @@
         <hr>
         <div class="comentarios-container">
             <h2>Comentários</h2>
-            <div id="sessao_comentario"></div>
+            <div id="sessao_comentario">
+                <div class="nenhum-comentario"><span id="comentario_vazio"></span></div>
+            </div>
         </div>
     </main>
 </body>
@@ -72,9 +74,23 @@
     const nomeUsuario = sessionStorage.NOME_USUARIO;
     const params = new URLSearchParams(window.location.search)
     const idPost = params.get('id');
-
+    document.title = `Post de ${nomeUsuario} | Zephyr`
+    
     let dadosPostagens = '';
     let comentarios = '';
+    
+    const textarea = document.getElementById("input_comentario");
+    textarea.onkeypress = function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            if(textarea.value != "") {
+                publicarComentario();
+                document.getElementById('btn_comentario').disabled = true;
+                document.getElementById('btn_comentario').classList.remove('btn-on')
+            }
+            // batatinha(event.target);
+        }
+    }
 
     function carregarPost() {
         fetch(`/post/carregarPost/${idPost}/${idUsuario}`).then(function (resposta) {
@@ -82,16 +98,18 @@
                 resposta.json().then(function (resposta) { 
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
                     post = resposta.postagem[0];
-                    comentarios = resposta.comentarios;
+                    comentarios = resposta.comentarios.reverse();
                     // curtidas = resposta.curtidas;
-                    document.title = `Zephyr | Post de ${post.nomeUsuario}`
                     
                     autor_nome.innerHTML = post.nomeUsuario;
                     titulo_post.innerHTML = post.titulo;
                     conteudo_post.innerHTML = post.descricao;
                     span_qtdCurtidas.innerHTML = post.qtdCurtidas;
                     span_qtdComentarios.innerHTML = post.qtdComentarios;
-                
+                    
+                    if(resposta.comentarios.length == 0) {
+                        comentario_vazio.innerHTML = "Seja o primeiro a comentar!"
+                    }
                     comentarios.map(comentario => {
                         sessao_comentario.innerHTML += `
                             <div class="box-comentario">
@@ -133,6 +151,9 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
+                if(comentario_vazio.textContent != ""){
+                    comentario_vazio.innerHTML = ""
+                }
                 sessao_comentario.innerHTML += `
                             <div class="box-comentario">
                                 <div class="box-comentario-foto">

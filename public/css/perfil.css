@@ -85,11 +85,20 @@ hr{
     box-sizing: border-box;
     width: 80vw;
     height: max-content;
-    padding: 3vh;
+    padding-top: 3vh;
+    padding-bottom: 4vh;
     background-color: #1d1d1d;
     border-radius: 0 0 25px 25px;
     color: white;
+    margin-bottom: 5vh;
+}
+.pf-post-container h1{
+    margin-inline: 3vh;
+}
+.pf-post-section{
+    display: flex;
+    flex-direction: column-reverse;
 }
 .feedPost{
-    border-bottom: 0;
+    padding-left: 4%;
 }
