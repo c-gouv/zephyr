@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Freeman&family=Khula:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Lexend+Deca:wght@100..900&family=Lilita+One&display=swap');
 * {
     margin: 0;
 }
@@ -9,8 +10,9 @@ body {
     backdrop-filter: brightness(60%);
     overflow-x: hidden;
     background-image: url(../assets/background.jpg);
-    background-position:initial;
-    background-size: 160%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
 }
 main {
     width: 100vw;
@@ -129,32 +131,32 @@ h1{
 .legenda{
     line-height: 120%;
     color: white;
-    font-weight: 400;
-    font-size: 1.5rem;
-}
-#sobre {
-    background-color: #1d1d1d;
-    height: 100vh;
+    font-weight: 200;
+    font-size: 1.35rem;
+    font-family: 'Lexend Deca', sans-serif;
 }
 .headerBlock{
     background-color: #1d1d1d;
 }
 /* SOBRE--------------------------------------------------------------- */
-#sobre{
+#sobreProjeto{
+    background-color: #1d1d1d;
     color: white;
     font-family: 'Khula', sans-serif;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
 }
-#sobre .titulo{
+#sobreProjeto .titulo{
     padding-block: 6%;
     text-align: center;
 }
 .sobreContent{
     margin-inline: 5%;
     width: 100%;
-    gap: 1%;
+    gap: 2%;
     display: flex;
 }
 .sobreContentText{
@@ -181,4 +183,114 @@ h1{
 .sobreImg{
     width: 45%;
     border-radius: 2vw;
+}
+.sobreImg2{
+    width: 45%;
+    border-radius: 2vw;
+}
+/* SOBRE DEV */
+#sobreDesenvolvedor{
+    background-color: #1d1d1d; 
+    font-family: 'Khula', sans-serif;
+    color: white;
+    overflow: hidden;
+}
+#sobreDesenvolvedor .titulo{
+    padding-top: 7%;
+    padding-bottom: 6%;
+    text-align: center;
+}
+.sobre-dev-content{
+    transform: translateY(-10%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: 2vw;
+    align-items: center;
+    overflow: hidden;
+    height: 83.8vh;
+    border-bottom: 1px solid #00fa38;
+    text-align: center;
+}
+.sobre-content-img{
+    height: 40vw;
+    /* position: absolute; */
+}
+.foto-sobre{
+    border-radius: 100vw;
+    width: 20vw;
+    margin-inline: auto;
+    border: 1px solid #1d1d1d;
+}
+.info-dev-container{
+    border-radius: 20vw 20vw 0 0;
+    width: 20vw;
+    height: 36vw;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #00fa38;
+}
+.banana{
+    position: absolute;
+    margin-inline: 36%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.banana i{
+    margin: auto;
+    color: black;
+    font-size: 3rem;
+}
+.banana h1{
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 2.2rem;
+    margin-top: 5vh;
+    color: #00fa38;
+    text-shadow: 2px 0 #0c0c0c, -2px 0 #0c0c0c, 0 2px #0c0c0c, 0 -2px #0c0c0c,
+    1px 1px #0c0c0c, -1px -1px #0c0c0c, 1px -1px #0c0c0c, -1px 1px #0c0c0c;
+}
+#img1{
+    transform: translateX(-20%);
+    /* position: absolute; */
+}
+#img2{
+    width: 63vw;
+    transform: translateX(30%) translateY(10%);
+    /* height: 20vw; */
+}
+/* GAMBIARRA DE COR ---------------------------------------------------------- */
+h1 span:nth-child(10n + 1){
+    color: red;
+}
+h1 span:nth-child(10n + 2){
+    color: orange;
+}
+h1 span:nth-child(10n + 3){
+    color: yellow;
+}
+h1 span:nth-child(10n + 4){
+    color: green;
+}
+h1 span:nth-child(10n + 5){
+    color: blue;
+}
+h1 span:nth-child(10n + 6){
+    color: purple;
+}
+h1 span:nth-child(10n + 7){
+    color: blue;
+}
+h1 span:nth-child(10n + 8){
+    color: green;
+}
+h1 span:nth-child(10n + 9){
+    color: yellow;
+}
+h1 span:nth-child(10n + 10){
+    color: orange;
+}
+h1 span:nth-child(10n + 11){
+    color: red;
 }

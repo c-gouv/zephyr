@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="shortcut icon" href="./assets/img/logo.ico">
+    <link rel="shortcut icon" href="./assets/img/logo.svg">
+    <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
     <title>Zephyr</title>
 </head>
 <body onscroll="headerOnTop()">
@@ -13,7 +14,7 @@
         <div class="headerButtonContainer">
             <div class="headerButton">
                 <a href="#">Home</a>
-                <a href="#sobre">Sobre</a>
+                <a href="#sobreProjeto">Sobre</a>
             </div>
             <button class="headerLogin" onclick="redirecionarLogin()">Entrar ➜</button>
         </div>
@@ -21,7 +22,7 @@
 
     <main>
         <div id="home">
-            <div class="homeContent">
+            <div class="homeContent" title="Shyvana Destruida © Riot Games">
                 <h1 style="color: white;">CANSADO DE SEMPRE JOGAR<br>COM PESSOAS <span style="color: #00FA38; background-color: #1d1d1d; height: 90%;">TOXICAS?</span></h1>
                 <span class="legenda">Deixe que a Zephyr te ajude a encontrar as pessoas<br>certas para as suas partidas!</span>
                 <button class="homeButton" href="#sobre">SAIBA MAIS ➤</button>
@@ -29,7 +30,7 @@
             <img src="./assets/img/ventoCinza.svg" class="homeEfeito">
         </div>
 
-        <div id="sobre">
+        <div id="sobreProjeto">
             <h1 class="titulo">SOBRE O <span style="color: #00FA38;">PROJETO</span></h1>
             <div class="sobreContent">
                 <div class="sobreContentText">
@@ -37,7 +38,29 @@
                     <span class="legenda">A Zephyr é um é uma plataforma que conecta jogadores de todas as habilidades e origens, promovendo uma comunidade inclusiva e acolhedora, onde as pessoas podem fechar times, para que possam se divertir e manter o respeito mútuo, buscamos criar um ambiente onde todos se sintam bem-vindos e valorizados.</span>
                     <button class="sobreButton" onclick="redirecionarLogin()">PARTICIPE ➤</button>
                 </div>
-                <img src="./assets/aaaaaaaaaaaaaa.png" class="sobreImg">
+                <img src="./assets/aaaaaaaaaaaaaa.png" class="sobreImg" title="Overwatch 2: Invasão © Blizzard Games">
+            </div>
+            <div class="sobreContent">
+                <img src="./assets/tracer.png" class="sobreImg2" title="Overwatch 2: Invasão © Blizzard Games">
+                <div class="sobreContentText">
+                    <h1 class="texto-colorido"><span>D</span><span>I</span><span>V</span><span>E</span><span>R</span><span>S</span><span>I</span><span>D</span><span>A</span><span>D</span><span>E</span></h1>
+                    <span class="legenda">Acreditamos que sempre há um lugar para qualquer tipo de pessoa em nossa comunidade, pois estamos comprometidos em promover a <b style="color: #00FA38;">diversidade</b> e a <b style="color: #00FA38;">inclusão</b> em todos aspectos, desde a seleção de jogos até as interações entre os membros, e sempre estamos atento para previnir que qualquer atividade desrespeitosa aconteça. Pois a diversidade de perspectivas enriquece nossa comunidade e torna nossas experiências de jogo mais vibrantes e emocionantes.</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="sobreDesenvolvedor">
+            <h1 class="titulo">SOBRE O <span style="color: #00FA38;">DESENVOLVEDOR</span></h1>
+            <div class="sobre-dev-content" style="margin: 0;">
+                <img src="./assets/img/mercyAzul.svg" class="sobre-content-img" id="img1">
+                <div class="banana">
+                    <div class="info-dev-container">
+                        <img src="./assets/img/zenyataLulaPfp.png" class="foto-sobre">
+                        <h1>CAUÃ GOUVEA</h1>
+                        <i class="fa-solid fa-angle-down fa-bounce"></i>
+                    </div>
+                </div>
+                <img src="./assets/img/gordo.svg" class="sobre-content-img" id="img2">
             </div>
         </div>
     </main>
