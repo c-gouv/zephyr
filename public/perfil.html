@@ -38,10 +38,10 @@
 <script src="./js/allTools.js"></script>
 </html>
 <script>
-
+    const idUsuario = sessionStorage.ID_USUARIO
+    const nomeUsuario = sessionStorage.NOME_USUARIO;
+    
     function atualizarFeedPerfil() {
-        const idUsuario = sessionStorage.ID_USUARIO
-        const nomeUsuario = sessionStorage.NOME_USUARIO;
         document.title = `${nomeUsuario} | Zephyr`
         header_username.innerHTML = sessionStorage.NOME_USUARIO
 
@@ -70,7 +70,10 @@
                                 <img src="./assets/img/pfpIcon.svg" class="iconPost">
                                 <div class="postUserText">
                                     <span class="postUserNome">${post.nomeUsuario}</span>
-                                    <span class="postUserHora">4h atras</span>
+                                    <span class="postUserHora">${calcularTempoAtras(post.dataHora)}</span>
+                                </div>
+                                <div class="delete-option" onclick="deletarPost(${post.idPost})">
+                                    <i class="fa-regular fa-trash-can"></i>
                                 </div>
                             </div>
                             <div class="postContentContainer" onclick="abrirPost(${post.idPost})">
@@ -96,4 +99,31 @@
             console.error(resposta);
         });
     }
+
+    function deletarPost(id) {
+        const idPost = id
+
+        fetch(`/feed/deletarPost/${idPost}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                locaiton.reload()
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+    // ABRIR POST ------------------------------------------------------------------------------------
+    function abrirPost(id){
+        window.location = `/post.html?id=${id}`
+    }
 </script>
+<script src="./js/formatarHoras.js"></script>

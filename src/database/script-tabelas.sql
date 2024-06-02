@@ -44,6 +44,9 @@ create table comentarioPost (
     
 select * from comentarioPost;
 select * from usuario;
+select * from post;
+truncate comentarioPost;
+truncate post;
 insert into usuario(usuario, email, senha) values
 	("ericoLinguica", "erickLinguica@gmail.com", "abc");
 

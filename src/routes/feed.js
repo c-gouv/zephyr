@@ -15,8 +15,8 @@ router.post("/publicar/:idUsuario", function (req, res) {
     feedController.publicar(req, res);
 });
 
-// router.delete("/deletar/:idAviso", function (req, res) {
-//     feedController.deletar(req, res);
-// });
+router.delete("/deletarPost/:idPost", function (req, res) {
+    feedController.deletarPost(req, res);
+});
 
 module.exports = router;

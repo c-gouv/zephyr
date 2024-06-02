@@ -85,14 +85,14 @@
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var post = resposta[i];
-
+                        console.log(post.dataHora)
                         feed.innerHTML += `
                         <div class="feedPost">
                             <div class="postUserInfo">
                                 <img src="./assets/img/pfpIcon.svg" class="iconPost">
                                 <div class="postUserText">
                                     <span class="postUserNome">${post.nomeUsuario}</span>
-                                    <span class="postUserHora">4h atras</span>
+                                    <span class="postUserHora">${calcularTempoAtras(post.dataHora)}</span>
                                 </div>
                             </div>
                             <div class="postContentContainer" onclick="abrirPost(${post.idPost})">
@@ -147,10 +147,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/home.html";
-                // limparFormulario();
-                // finalizarAguardar();
+                location.reload()
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -176,3 +173,4 @@
         window.location = `/post.html?id=${id}`
     }
 </script>
+<script src="./js/formatarHoras.js"></script>

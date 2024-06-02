@@ -58,27 +58,28 @@ function publicar(req, res) {
     }
 }
 
-// function deletar(req, res) {
-//     var idAviso = req.params.idAviso;
+function deletarPost(req, res) {
+    var idPost = req.params.idPost;
 
-//     avisoModel.deletar(idAviso)
-//         .then(
-//             function (resultado) {
-//                 res.json(resultado);
-//             }
-//         )
-//         .catch(
-//             function (erro) {
-//                 console.log(erro);
-//                 console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-//                 res.status(500).json(erro.sqlMessage);
-//             }
-//         );
-// }
+    feedModel.deletarTodosComentario(idPost)
+    .then(
+        async function (resultado) {
+            await feedModel.deletarPost(idPost);
+            res.json(resultado);
+        }
+    )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 module.exports = {
     listar,
     publicar,
-    listarPorPerfil
-    // deletar
+    listarPorPerfil,
+    deletarPost
 }

@@ -82,3 +82,13 @@ body::-webkit-scrollbar-thumb{
     display: flex;
     flex-direction: column-reverse;
 }
+.delete-option{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    font-size: 1.2rem;
+}
+.delete-option i:hover{
+    color: #00fa38;
+    cursor: pointer;
+}
