@@ -24,7 +24,7 @@ function carregarComentarioPost(idPost) {
 
 function publicarComentario(idPost, usuario, mensagem) {
     var instrucaoSql = `
-        insert into comentarioPost(fkPost, fkUsuario, mensagem, dataHora) values
+        INSERT INTO comentarioPost(fkPost, fkUsuario, mensagem, dataHora) VALUES
             (${idPost}, ${usuario}, '${mensagem}', now());
         `;
   
@@ -32,7 +32,23 @@ function publicarComentario(idPost, usuario, mensagem) {
     return database.executar(instrucaoSql);
 }
 
+function checarCurtidaUsuario(idPost, idUsuario) {
+    var instrucaoSql = `
+        SELECT
+            *
+        FROM
+            curtidaPost
+        JOIN
+            post
+        ON
+            fkPost = ${idPost} AND fkUsuario = ${idUsuario}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     carregarComentarioPost,
-    publicarComentario
+    publicarComentario,
+    checarCurtidaUsuario
 }

@@ -28,9 +28,20 @@ create table post (
     titulo varchar(50),
     descricao varchar(250),
     dataHora datetime,
-    curtida int,
     fkImagem int,
     foreign key (fkImagem) references imagem(idImagem));
+    
+create table curtidaPost (
+	idCurtida int auto_increment,
+    fkUsuario int,
+    fkPost int,
+    primary key (idCurtida, fkUsuario, fkPost),
+    foreign key (fkUsuario) references usuario(idUsuario),
+    foreign key (fkPost) references post(idPost),
+    dataHora datetime);
+    
+insert into curtidaPost(fkUsuario, fkPost, dataHora) values
+	(1, 14, now());
     
 create table comentarioPost (
 	idComentario int auto_increment,
@@ -45,8 +56,7 @@ create table comentarioPost (
 select * from comentarioPost;
 select * from usuario;
 select * from post;
-truncate comentarioPost;
-truncate post;
+
 insert into usuario(usuario, email, senha) values
 	("ericoLinguica", "erickLinguica@gmail.com", "abc");
 

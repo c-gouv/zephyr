@@ -1,7 +1,6 @@
 var database = require("../database/config");
 
 function listar() {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
         SELECT 
             p.idPost,
@@ -9,10 +8,9 @@ function listar() {
             p.titulo,
             p.descricao,
             p.fkUsuario,
-            u.idUsuario,
             u.nomeUsuario,
             (SELECT COALESCE(count(idComentario)) FROM comentarioPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
-            COALESCE(p.curtida, 0) as qtdCurtidas
+            (SELECT COALESCE(count(idCurtida), 0) FROM curtidaPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdCurtidas
         FROM post p
             JOIN usuario u
                 ON p.fkUsuario = u.idUsuario
@@ -22,7 +20,6 @@ function listar() {
 }
 
 function listarPorPerfil(idUsuario) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
         SELECT 
             p.idPost,
@@ -44,7 +41,6 @@ function listarPorPerfil(idUsuario) {
 }
 
 function publicar(titulo, descricao, idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
     var instrucaoSql = `
         INSERT INTO post(fkUsuario, titulo, descricao, dataHora) values (${idUsuario},'${titulo}', '${descricao}', now());
     `;
@@ -53,7 +49,6 @@ function publicar(titulo, descricao, idUsuario) {
 }
 
 function deletarPost(idPost) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idPost);
     var instrucaoSql = `
         DELETE FROM post WHERE idPost = ${idPost};
     `;
@@ -62,7 +57,6 @@ function deletarPost(idPost) {
 }
 
 function deletarTodosComentario(idPost) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idPost);
     var instrucaoSql = `
         DELETE FROM comentarioPost WHERE fkPost = ${idPost};
     `;

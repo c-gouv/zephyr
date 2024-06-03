@@ -85,6 +85,9 @@
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var post = resposta[i];
+                        var idPost = post.idPost
+                        var idUsuario = sessionStorage.ID_USUARIO
+
                         console.log(post.dataHora)
                         feed.innerHTML += `
                         <div class="feedPost">
@@ -108,15 +111,36 @@
                             </div>
                             <div class="postInteracao">
                                 <div class="interacao" id="divCurtida">
-                                    <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> ${post.qtdCurtidas}
+                                    <i class="fa-regular fa-heart postInteracaoIcon" id="icon_curtida${post.idPost}" onclick="curtir(${post.idPost})"></i> ${post.qtdCurtidas}
                                 </div>
                                 <div class="interacao" id="divComent">
                                     <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> ${post.qtdComentarios}
                                 </div>
                             </div>
                         </div>`
+                    
+                        fetch(`/post/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                        if(resposta.ok){
+                            resposta.json().then(function (resposta) {
+                                for (let i = 0; i < resposta.length; i++) {
+                                    var post = resposta[i];
+
+                                    console.log(post.fkUsuario)
+                                    const icon = document.getElementById(`icon_curtida${post.fkPublicacao}`);
+
+                                    if (idUsuario == post.fkUsuario) {
+                                        console.log("Já curtiu esse comentario")
+
+                                    } else {
+                                        console.log("Não curtiu")
+                                    }
+                                };
+                            });
+                        }
+                    });
                     }
                     allTools();
+
                 });
             } else {
                 throw ('Houve um erro na API!');
