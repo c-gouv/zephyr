@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zephyr | Métricas</title>
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/postPadrao.css">
+    <link rel="stylesheet" href="./css/metricas.css">
+    <link rel="shortcut icon" href="./assets/img/logo.svg">
+</head>
+<body onload="postDashboard()">
+    <header id="headerPadrao"></header>
+    <div id="modal_perfil"></div>
+    <main>
+        <div class="metricas-retornar" onclick="voltarPerfil()">
+            <i class="fa-solid fa-angle-left"></i>
+            <span>Perfil</span>
+        </div>
+        <hr>
+        <div class="kpi-container">
+            <div class="kpi-box">
+                Quantidade de Curtidas
+                <h2>10</h2>
+            </div>
+            <div class="kpi-box">
+                Quantidade de Comentários
+                <h2>500</h2>
+            </div>
+        </div>
+        <div class="segunda-linha-dash">
+            <div class="graph-container">
+                <canvas id="graphDashboard"></canvas>
+            </div>
+            <div class="post-container">
+                <h2>Postagem com maior <span style="color: #00FA38;">engajamento</span></h2>
+                <div id="post_box">
+
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+<script src="./js/formatarHoras.js"></script>
+<script src="./js/header.js"></script>
+<script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function voltarPerfil(){
+        window.location = "./perfil.html"
+    }
+
+
+
+    const grafico = document.getElementById('graphDashboard');
+    new Chart(grafico, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            data: [12, 15, 3, 5, 2, 3],
+            borderWidth: 1,
+            fill: true,
+            lineTension: 0.2,
+            borderColor: '#00fa38',
+            backgroundColor: '#00fa3830'
+        }]
+    },
+    options: {
+        plugins:{
+            legend:{
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
+    function postDashboard() {
+        const idUsuario = sessionStorage.ID_USUARIO
+
+        console.log(idUsuario)
+
+        fetch(`/post/postDashboard/${idUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var postBox = document.getElementById("post_box");
+                    for (let i = 0; i < resposta.length; i++) {
+                        var post = resposta[i];
+                        postBox.innerHTML = `
+                        <div class="feedPost">
+                        <div class="postUserInfo">
+                            <img src="./assets/img/pfpIcon.svg" class="iconPost">
+                            <div class="postUserText">
+                                <span class="postUserNome">${post.nomeUsuario}</span>
+                                <span class="postUserHora">${calcularTempoAtras(post.dataHora)}</span>
+                            </div>
+                        </div>
+                        <div class="postContentContainer">
+                            <h2 class="tituloPost">${post.titulo}</h2>
+                            <span class="postTexto">${post.descricao}</span>
+                        </div>
+                        <div class="postInteracao">
+                            <div class="interacao" id="divCurtida">
+                                <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> ${post.qtdCurtidas}
+                            </div>
+                            <div class="interacao" id="divComent">
+                                <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> ${post.qtdComentarios}
+                            </div>
+                        </div>
+                    </div>`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+</script>

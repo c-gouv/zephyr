@@ -23,14 +23,13 @@
             <div class="header-username"><span id="header_username"></span></div>
             <div class="header-buttons">
                 <i class="fa-solid fa-gear"></i>
-                <button>Ver Estatísticas <i class="fa-solid fa-chart-simple"></i></button>
+                <button onclick="irParaMetricas()">Ver Estatísticas <i class="fa-solid fa-chart-simple"></i></button>
             </div>
         </div>
         <hr color="0c0c0c">
         <div class="pf-post-container">
             <h1>Publicações</h1>
-            <div class="pf-post-section" id="post_container">
-            </div>
+            <div class="pf-post-section" id="post_container"></div>
         </div>
     </main>
 </body>
@@ -48,11 +47,7 @@
         fetch(`/feed/listarPorPerfil/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
+                    post_container.innerHTML = `<div class="nenhum-comentario"><span>Nenhuma publicação ainda</span></div>`
                 }
 
                 resposta.json().then(function (resposta) {
@@ -124,6 +119,10 @@
     // ABRIR POST ------------------------------------------------------------------------------------
     function abrirPost(id){
         window.location = `/post.html?id=${id}`
+    }
+    // PÁGINA DE MÉTRICAS ----------------------------------------------------------------------------
+    function irParaMetricas() {
+        window.location = "./metricas.html"
     }
 </script>
 <script src="./js/formatarHoras.js"></script>

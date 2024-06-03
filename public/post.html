@@ -20,12 +20,12 @@
             Post
         </div>
         <hr>
-        <div>
+        <div style="padding-bottom: 1%;">
             <div class="autor-user-info">
                 <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
                 <div>
                     <span id="autor_nome"></span><br>
-                    <span id="hora_post">4h</span>
+                    <span id="hora_post"></span>
                 </div>
             </div>
             <div class="postContentContainer">
@@ -40,8 +40,8 @@
                         <div id="user4"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
                         <div id="user5"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
             <div class="interacao-container">
                 <div class="interacao-box">
                     <i class="fa-regular fa-heart" id="iconCurtida"></i> <span id="span_qtdCurtidas"></span>
@@ -67,6 +67,7 @@
 
 <script src="./js/header.js"></script>
 <script src="./js/allTools.js"></script>
+<script src="./js/formatarHoras.js"></script>
 </html>
 
 <script>
@@ -88,7 +89,6 @@
                 document.getElementById('btn_comentario').disabled = true;
                 document.getElementById('btn_comentario').classList.remove('btn-on')
             }
-            // batatinha(event.target);
         }
     }
 
@@ -99,13 +99,13 @@
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
                     post = resposta.postagem[0];
                     comentarios = resposta.comentarios.reverse();
-                    // curtidas = resposta.curtidas;
                     
                     autor_nome.innerHTML = post.nomeUsuario;
                     titulo_post.innerHTML = post.titulo;
                     conteudo_post.innerHTML = post.descricao;
                     span_qtdCurtidas.innerHTML = post.qtdCurtidas;
                     span_qtdComentarios.innerHTML = post.qtdComentarios;
+                    hora_post.innerHTML = calcularTempoAtras(post.dataHora);
                     
                     if(resposta.comentarios.length == 0) {
                         comentario_vazio.innerHTML = "Seja o primeiro a comentar!"
@@ -117,7 +117,7 @@
                                     <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
                                 </div>
                                 <div class="box-comentario-conteudo">
-                                    <span id="autor_comentario_nome">${comentario.nomeUsuario}</span>
+                                    <span id="autor_comentario_nome">${comentario.nomeUsuario} <span class="hora-comentario">• ${calcularTempoAtras(comentario.dataHora)}</span></span>
                                     <span id="comentario_content">${comentario.mensagem}</span>
                                 </div>
                             </div>`
