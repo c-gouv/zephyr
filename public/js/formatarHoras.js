@@ -14,13 +14,13 @@ function calcularTempoAtras(dataHora) {
     horasAtras %= 24
 
     if (diasAtras > 0) {
-        dataPostagem = `${diasAtras} d atrás`;
+        dataPostagem = `${diasAtras}d atrás`;
     } else if (horasAtras > 0) {
-        dataPostagem = `${horasAtras} h atrás`;
+        dataPostagem = `${horasAtras}h atrás`;
     } else if (minutosAtras > 0) {
-        dataPostagem = `${minutosAtras} m atrás`;
+        dataPostagem = `${minutosAtras}m atrás`;
     } else {
-        dataPostagem = `${segundosAtras} s atrás`;
+        dataPostagem = `${segundosAtras}s atrás`;
     }
 
     return dataPostagem;

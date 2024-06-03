@@ -10,7 +10,7 @@ function listar() {
             p.fkUsuario,
             u.nomeUsuario,
             (SELECT COALESCE(count(idComentario)) FROM comentarioPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
-            (SELECT COALESCE(count(idCurtida), 0) FROM curtidaPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdCurtidas
+            (SELECT COALESCE(count(idCurtida)) FROM curtidaPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdCurtidas 
         FROM post p
             JOIN usuario u
                 ON p.fkUsuario = u.idUsuario

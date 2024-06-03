@@ -118,6 +118,7 @@ main{
 #sessao_comentario{
     display: flex;
     flex-direction: column-reverse;
+    padding-bottom: 2vh;
 }
 .comentarios-container {
     min-height: 7vh;
@@ -154,13 +155,8 @@ main{
 .btn-on{
     opacity: 1;
 }
-.nenhum-comentario{
-    width: 100%;
-    margin: auto;
-}
-.nenhum-comentario span{
-    display: flex;
-    opacity: 0.3;
-    justify-content: center;
-    margin-bottom: 3%;
+.hora-comentario{
+    font-size: 0.8rem;
+    opacity: 0.5;
+    font-weight: 200;
 }

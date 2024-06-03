@@ -7,7 +7,6 @@
         <input type="text" class="inputPesquisa">
     </div>
     <div class="headerUserArea">
-        <i class="fa-regular fa-bell iconSino"></i>
         <img src="./assets/img/pfpIcon.svg" class="iconPfp" onclick="toggleModalPerfil()">
     </div>`
 })();
