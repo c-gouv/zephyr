@@ -140,7 +140,7 @@
             mensagemServer: comentario
         }
 
-        fetch('/comentario/publicarComentario', {
+        fetch('/interacao/publicarComentario', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -160,7 +160,7 @@
                                     <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
                                 </div>
                                 <div class="box-comentario-conteudo">
-                                    <span id="autor_comentario_nome">${nomeUsuario}</span>
+                                    <span id="autor_comentario_nome">${nomeUsuario} <span class="hora-comentario">• 0s atrás</span></span>
                                     <span id="comentario_content">${comentario}</span>
                                 </div>
                             </div>`

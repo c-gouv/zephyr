@@ -1,11 +1,11 @@
-var comentarioModel = require("../models/comentarioModel");
+var interacaoModel = require("../models/interacaoModel");
 
 function publicarComentario(req, res) {
     var idPost = req.body.idPostServer;
     var usuario = req.body.usuarioServer;
     var mensagem = req.body.mensagemServer;
 
-    comentarioModel.publicarComentario(idPost, usuario, mensagem)
+    interacaoModel.publicarComentario(idPost, usuario, mensagem)
         .then(
             function (resultado) {
                 res.json(resultado);

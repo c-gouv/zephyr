@@ -18,14 +18,19 @@
             <span>Perfil</span>
         </div>
         <hr>
+        <h1 style="text-align: center;">Métricas <span style="color:#00FA38">Semanais</span></h1>
         <div class="kpi-container">
             <div class="kpi-box">
                 Quantidade de Curtidas
-                <h2>10</h2>
+                <h2 id="kpi_curtida"></h2>
+            </div>
+            <div class="kpi-box">
+                Impressões Totais
+                <h2 id="kpi_engajamento"></h2>
             </div>
             <div class="kpi-box">
                 Quantidade de Comentários
-                <h2>500</h2>
+                <h2 id="kpi_comentario"></h2>
             </div>
         </div>
         <div class="segunda-linha-dash">
@@ -48,60 +53,55 @@
 <script src="https://kit.fontawesome.com/d94da5d75d.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    const idUsuario = sessionStorage.ID_USUARIO
     function voltarPerfil(){
         window.location = "./perfil.html"
     }
 
-
-
     const grafico = document.getElementById('graphDashboard');
     new Chart(grafico, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            data: [12, 15, 3, 5, 2, 3],
-            borderWidth: 1,
-            fill: true,
-            lineTension: 0.2,
-            borderColor: '#00fa38',
-            backgroundColor: '#00fa3830'
-        }]
-    },
-    options: {
-        plugins:{
-            legend:{
-                display: false
-            }
+        type: 'line',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                data: [12, 15, 3, 5, 2, 3],
+                borderWidth: 1,
+                fill: true,
+                lineTension: 0.2,
+                borderColor: '#00fa38',
+                backgroundColor: '#00fa3830'
+            }]
         },
-        scales: {
-            y: {
-                beginAtZero: true
+        options: {
+            plugins:{
+                legend:{
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
     });
 
     function postDashboard() {
-        const idUsuario = sessionStorage.ID_USUARIO
-
-        console.log(idUsuario)
-
         fetch(`/post/postDashboard/${idUsuario}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    throw "Nenhum resultado encontrado!!";
+                    post_box.innerHTML = `<span style="opacity: 0.5; width: 100%; text-align: center">Você ainda não fez nenhuma postagem</span>`
                 }
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
+                resposta.json().then(json => {
                     var postBox = document.getElementById("post_box");
-                    for (let i = 0; i < resposta.length; i++) {
-                        var post = resposta[i];
+                    var postagemJson = json.postagem
+                    var curtidasJson = Number(json.curtidas[0].qtdCurtidas)
+                    var comentariosJson = Number(json.comentarios[0].qtdComentarios)
+                    var engajamento = curtidasJson + comentariosJson
+
+                    for (let i = 0; i < postagemJson.length; i++) {
+                        var post = postagemJson[i];
                         postBox.innerHTML = `
                         <div class="feedPost">
                         <div class="postUserInfo">
@@ -125,6 +125,10 @@
                         </div>
                     </div>`
                     }
+                    console.log(curtidasJson)
+                    kpi_curtida.innerHTML = curtidasJson
+                    kpi_comentario.innerHTML = comentariosJson
+                    kpi_engajamento.innerHTML = engajamento
                 });
             } else {
                 throw ('Houve um erro na API!');

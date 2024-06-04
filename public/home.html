@@ -111,25 +111,25 @@
                             </div>
                         </div>`
                     
-                        fetch(`/post/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
-                        if(resposta.ok){
-                            resposta.json().then(function (resposta) {
-                                for (let i = 0; i < resposta.length; i++) {
-                                    var post = resposta[i];
+                    //     fetch(`/post/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                    //     if(resposta.ok){
+                    //         resposta.json().then(function (resposta) {
+                    //             for (let i = 0; i < resposta.length; i++) {
+                    //                 var post = resposta[i];
 
-                                    console.log(post.fkUsuario)
-                                    const icon = document.getElementById(`icon_curtida${post.fkPublicacao}`);
+                    //                 console.log(post.fkUsuario)
+                    //                 const icon = document.getElementById(`icon_curtida${post.fkPublicacao}`);
 
-                                    if (idUsuario == post.fkUsuario) {
-                                        console.log("Já curtiu esse comentario")
+                    //                 if (idUsuario == post.fkUsuario) {
+                    //                     console.log("Já curtiu esse comentario")
 
-                                    } else {
-                                        console.log("Não curtiu")
-                                    }
-                                };
-                            });
-                        }
-                    });
+                    //                 } else {
+                    //                     console.log("Não curtiu")
+                    //                 }
+                    //             };
+                    //         });
+                    //     }
+                    // });
                     }
                     allTools();
 

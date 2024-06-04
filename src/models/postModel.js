@@ -43,7 +43,40 @@ function postDashboard(fkUsuario) {
         return database.executar(instrucaoSql);
 }
 
+function kpiDashboardCurtida(fkUsuario) {
+    var instrucaoSql = `
+    SELECT
+        COUNT(*) AS qtdCurtidas
+    FROM curtidaPost AS cur
+        JOIN post AS p
+            ON cur.fkPost = p.idPost
+    WHERE p.fkUsuario = ${fkUsuario};`
+
+    return database.executar(instrucaoSql);
+}
+
+function kpiDashboardComentario(fkUsuario) {
+    var instrucaoSql = `
+    SELECT
+        COUNT(*) AS qtdComentarios
+    FROM comentarioPost AS com
+        JOIN post AS p
+            ON com.fkPost = p.idPost
+    WHERE p.fkUsuario = ${fkUsuario};`
+
+    return database.executar(instrucaoSql);
+}
+
+function checarCurtidaUsuario(idPost, idUsuario){
+    var instrucaoSql = ``
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     carregarPost,
-    postDashboard
+    postDashboard,
+    checarCurtidaUsuario,
+    kpiDashboardCurtida,
+    kpiDashboardComentario
 }

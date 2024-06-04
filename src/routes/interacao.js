@@ -1,13 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
-var comentarioController = require("../controllers/comentarioController");
+var interacaoController = require("../controllers/interacaoController");
 
 router.post("/publicarComentario", function (req, res) {
-    comentarioController.publicarComentario(req, res);
+    interacaoController.publicarComentario(req, res);
 });
 // router.get("/checarCurtidaUsuario", function (req, res) {
-//     comentarioController.checarCurtidaUsuario(req, res);
+//     interacaoController.checarCurtidaUsuario(req, res);
 // });
 
 module.exports = router;
