@@ -4,10 +4,10 @@ var postModel = require("../models/postModel")
 
 function carregarPost(req, res) {
     var idPost = req.params.idPost;
-    // var idUsuario = req.params.idUsuario;
+    var idUsuario = req.params.idUsuario;
 
     let comentarios = []
-    // let curtidas = []
+    let curtidas = []
 
     feedModel.carregarPost(idPost)
         .then(
@@ -21,11 +21,6 @@ function carregarPost(req, res) {
                             comentarios = [];
                         }
                     })
-                res.json({
-                    postagem: resultado,
-                    comentarios: comentarios
-                })
-
             } else {
                 res.status(403).send("Nenhum resultado encontrado!");
             }
@@ -75,25 +70,7 @@ function postDashboard(req, res) {
     });
 }
 
-function checarCurtidaUsuario(req, res) {
-    const idPost = req.params.idPost
-    const idUsuario = req.params.idUsuairo
-
-    interacaoModel.checarCurtidaUsuario(idPost, idUsuario).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
 module.exports = {
     carregarPost,
-    postDashboard,
-    checarCurtidaUsuario
+    postDashboard
 }

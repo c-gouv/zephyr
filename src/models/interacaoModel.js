@@ -37,11 +37,7 @@ function checarCurtidaUsuario(idPost, idUsuario) {
         SELECT
             *
         FROM
-            curtidaPost
-        JOIN
-            post
-        ON
-            fkPost = ${idPost} AND fkUsuario = ${idUsuario}`;
+            curtidaPost as c`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

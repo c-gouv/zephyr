@@ -57,11 +57,6 @@
     botaoLogin.addEventListener('click', () => {
         main.classList.remove("painel-direita-ativo");
     });
-
-    function submitForm(event) {
-         event.preventDefault();
-      }
-    form.addEventListener('submit', submitForm);
     // CADASTRAR---------------------------------------------------------------------------------------------------------
     function cadastrar(){
         const user = inputUser.value.trim()
@@ -131,7 +126,7 @@
 
                     setTimeout(function () {
                         window.location = "./home.html";
-                    }, 1000);
+                    });
 
                 });
 

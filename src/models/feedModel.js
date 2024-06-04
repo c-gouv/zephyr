@@ -64,10 +64,19 @@ function deletarTodosComentario(idPost) {
     return database.executar(instrucaoSql);
 }
 
+function deletarTodasCurtidas(idPost) {
+    var instrucaoSql = `
+        DELETE FROM curtidaPost WHERE fkPost = ${idPost};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
     publicar,
     listarPorPerfil,
     deletarPost,
-    deletarTodosComentario
+    deletarTodosComentario,
+    deletarTodasCurtidas
 }

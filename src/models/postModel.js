@@ -1,7 +1,6 @@
 var database = require("../database/config");
 
 function carregarPost(idPost) {
-    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
         SELECT 
             p.idPost,
@@ -21,7 +20,6 @@ function carregarPost(idPost) {
 }
 
 function postDashboard(fkUsuario) {
-    console.log(fkUsuario)
     var instrucaoSql = `
     SELECT
         p.idPost,
@@ -67,16 +65,9 @@ function kpiDashboardComentario(fkUsuario) {
     return database.executar(instrucaoSql);
 }
 
-function checarCurtidaUsuario(idPost, idUsuario){
-    var instrucaoSql = ``
-
-    return database.executar(instrucaoSql)
-}
-
 module.exports = {
     carregarPost,
     postDashboard,
-    checarCurtidaUsuario,
     kpiDashboardCurtida,
     kpiDashboardComentario
 }

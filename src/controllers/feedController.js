@@ -64,9 +64,11 @@ function deletarPost(req, res) {
     feedModel.deletarTodosComentario(idPost)
     .then(
         async function (resultado) {
+            await feedModel.deletarTodasCurtidas(idPost);
             await feedModel.deletarPost(idPost);
             res.json(resultado);
         }
+
     )
         .catch(
             function (erro) {

@@ -65,7 +65,8 @@
 </html>
 
 <script>
-    // CARREGAR FEED ------------------------------------------------------------------------------------
+    const idUsuario = sessionStorage.ID_USUARIO
+    // CARREGAR FEED -----------------------------------------------------------------------------------
     function atualizarFeed() {
         fetch("/feed/listar").then(function (resposta) {
             if (resposta.ok) {
@@ -82,12 +83,11 @@
 
                     var feed = document.getElementById("feedPost");
                     feed.innerHTML = "";
+
                     for (let i = 0; i < resposta.length; i++) {
                         var post = resposta[i];
                         var idPost = post.idPost
-                        var idUsuario = sessionStorage.ID_USUARIO
 
-                        console.log(post.dataHora)
                         feed.innerHTML += `
                         <div class="feedPost">
                             <div class="postUserInfo">
@@ -111,25 +111,34 @@
                             </div>
                         </div>`
                     
-                    //     fetch(`/post/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
-                    //     if(resposta.ok){
-                    //         resposta.json().then(function (resposta) {
-                    //             for (let i = 0; i < resposta.length; i++) {
-                    //                 var post = resposta[i];
+                        fetch(`/interacao/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                            if(resposta.ok){
+                                if (resposta.status == 204) {
+                                    var feed = document.getElementById("feed_container");
+                                    var mensagem = document.createElement("span");
+                                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                                    feed.appendChild(mensagem);
+                                    throw "Nenhum resultado encontrado!!";
+                                }
+                                resposta.json().then(function (resposta) {
+                                    console.log(resposta)
+                                    for (let i = 0; i < resposta.length; i++) {
+                                        var post = resposta[i];
+                                    console.log(post.fkPost)
 
-                    //                 console.log(post.fkUsuario)
-                    //                 const icon = document.getElementById(`icon_curtida${post.fkPublicacao}`);
+                                    if (idUsuario == post.fkUsuario) {
+                                        console.log(`O usuário ${post.fkUsuario} curtiu a publicação ${post.fkPost}`);
+                                        let icone = document.getElementById(`icon_curtida${post.fkPost}`);
 
-                    //                 if (idUsuario == post.fkUsuario) {
-                    //                     console.log("Já curtiu esse comentario")
-
-                    //                 } else {
-                    //                     console.log("Não curtiu")
-                    //                 }
-                    //             };
-                    //         });
-                    //     }
-                    // });
+                                        icone.classList.remove("fa-regular");
+                                        icone.classList.add("fa-solid");
+                                        icone.classList.add("evidenciarElementoHover")
+                                        console.log(icone)
+                                    }
+                                };
+                            });
+                        }
+                    });
                     }
                     allTools();
 
@@ -174,6 +183,18 @@
             // finalizarAguardar();
         });
         return false;
+    }
+    // CURTIR ------------------------------------------------------------------------------------------
+    function curtir(idPost) {
+        const iconeSelecionado = document.getElementById(`icon_curtida${idPost}`);
+        const estaCurtido = iconeSelecionado.classList.contains("fa-solid")
+        const naoEstaCurtido = iconeSelecionado.classList.contains("fa-regular")
+
+        if(estaCurtido) {
+            console.log(`O post ${idPost} está curtido`)
+        } else if (naoEstaCurtido){
+            console.log(`Ta curtido não nego ${idPost}`)
+        }
     }
     // FECHAR/ABRIR PUBLICAR ---------------------------------------------------------------------------
     function abrirModal(){

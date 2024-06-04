@@ -9,8 +9,5 @@ router.get("/carregarPost/:idPost/:idUsuario", function (req, res) {
 router.get("/postDashboard/:idUsuario", function (req, res) {
     postController.postDashboard(req, res);
 });
-router.get("/checarCurtidaUsuario/:idPost/:idUsuario", function (req, res) {
-    postController.checarCurtidaUsuario(req, res);
-});
 
 module.exports = router;
