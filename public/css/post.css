@@ -160,3 +160,9 @@ main{
     opacity: 0.5;
     font-weight: 200;
 }
+.evidenciarElementoHover{
+    color: #00fa38;
+}
+.fa-heart:hover{
+    cursor: pointer;
+}

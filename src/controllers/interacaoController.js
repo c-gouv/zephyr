@@ -39,7 +39,45 @@ function checarCurtidaUsuario(req, res) {
     });
 }
 
+function adicionarCurtida(req, res) {
+    const idPost = req.body.idPost
+    const idUsuario = req.body.idUsuario
+
+    interacaoModel.adicionarCurtida(idPost, idUsuario)
+        .then(
+            function (resultado) {
+            res.status(200).json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function removerCurtida(req, res) {
+    const idPost = req.body.idPost
+    const idUsuario = req.body.idUsuario
+
+    interacaoModel.removerCurtida(idPost, idUsuario)
+        .then(
+            function (resultado) {
+            res.status(200).json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     publicarComentario,
-    checarCurtidaUsuario
+    checarCurtidaUsuario,
+    adicionarCurtida,
+    removerCurtida
 }

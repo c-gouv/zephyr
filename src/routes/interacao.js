@@ -9,5 +9,13 @@ router.post("/publicarComentario", function (req, res) {
 router.get("/checarCurtidaUsuario/:idPost/:idUsuario", function (req, res) {
     interacaoController.checarCurtidaUsuario(req, res);
 });
+router.post("/adicionarCurtida", function (req, res) {
+    interacaoController.adicionarCurtida(req, res);
+});
+
+router.delete("/removerCurtida", function (req, res) {
+    interacaoController.removerCurtida(req, res);
+});
+
 
 module.exports = router;

@@ -35,9 +35,29 @@ function publicarComentario(idPost, usuario, mensagem) {
 function checarCurtidaUsuario(idPost, idUsuario) {
     var instrucaoSql = `
         SELECT
-            *
+            c.*
         FROM
-            curtidaPost as c`;
+            curtidaPost as c
+        JOIN
+            post as p
+                ON fkPost = idPost`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function adicionarCurtida(idPost, idUsuario) {
+    var instrucaoSql = `
+        INSERT INTO curtidaPost(fkPost, fkUsuario, dataHora) VALUES
+            (${idPost}, ${idUsuario}, now());`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function removerCurtida(idPost, idUsuario) {
+    var instrucaoSql = `
+        DELETE FROM curtidaPost WHERE fkPost = ${idPost} AND fkUsuario = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -46,5 +66,7 @@ function checarCurtidaUsuario(idPost, idUsuario) {
 module.exports = {
     carregarComentarioPost,
     publicarComentario,
-    checarCurtidaUsuario
+    checarCurtidaUsuario,
+    adicionarCurtida,
+    removerCurtida
 }

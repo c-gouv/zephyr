@@ -14,54 +14,12 @@
 <body onload="carregarPost(), validarSessao()">
     <header id="headerPadrao"></header>
     <div id="modal_perfil"></div>
-    <main>
+    <main id="main">
         <div class="post-retornar" onclick="voltarHome()">
             <i class="fa-solid fa-angle-left"></i>
             Post
         </div>
         <hr>
-        <div style="padding-bottom: 1%;">
-            <div class="autor-user-info">
-                <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
-                <div>
-                    <span id="autor_nome"></span><br>
-                    <span id="hora_post"></span>
-                </div>
-            </div>
-            <div class="postContentContainer">
-                <h1 id="titulo_post"></h1>
-                <span id="conteudo_post"></span>
-                <!-- <div class="partyList">
-                    <h3>Participantes:</h3>
-                    <div style="display: flex; gap: 20px;">
-                        <div id="user1"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
-                        <div id="user2"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
-                        <div id="user3"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
-                        <div id="user4"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
-                        <div id="user5"><img src="./assets/img/plusIcon.svg" class="partyUserIcon"></div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="interacao-container">
-                <div class="interacao-box">
-                    <i class="fa-regular fa-heart" id="iconCurtida"></i> <span id="span_qtdCurtidas"></span>
-                </div>
-                <div class="interacao-box">
-                    <i class="fa-regular fa-comments" id="iconComent"></i> <span id="span_qtdComentarios"></span>
-                </div>
-            </div>
-            <div class="comentar-container">
-                <textarea id="input_comentario" placeholder="Comente você também!"></textarea>
-                <button class="enviar-botao" id="btn_comentario" onclick="publicarComentario()" disabled>Enviar</button>
-            </div>
-        </div>
-        <hr>
-        <div class="comentarios-container">
-            <h2>Comentários</h2>
-            <div id="sessao_comentario">
-                <div class="nenhum-comentario"><span id="comentario_vazio"></span></div>
-            </div>
-        </div>
     </main>
 </body>
 
@@ -79,18 +37,6 @@
     
     let dadosPostagens = '';
     let comentarios = '';
-    
-    const textarea = document.getElementById("input_comentario");
-    textarea.onkeypress = function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-            if(textarea.value != "") {
-                publicarComentario();
-                document.getElementById('btn_comentario').disabled = true;
-                document.getElementById('btn_comentario').classList.remove('btn-on')
-            }
-        }
-    }
 
     function carregarPost() {
         fetch(`/post/carregarPost/${idPost}/${idUsuario}`).then(function (resposta) {
@@ -99,14 +45,70 @@
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
                     post = resposta.postagem[0];
                     comentarios = resposta.comentarios.reverse();
+
+                    main.innerHTML += `
+                    <div style="padding-bottom: 1%;">
+                        <div class="autor-user-info">
+                            <img src="./assets/img/pfpIcon.svg" class="autor-pfp">
+                            <div>
+                                <span id="autor_nome">${post.nomeUsuario}</span><br>
+                                <span id="hora_post">${calcularTempoAtras(post.dataHora)}</span>
+                            </div>
+                        </div>
+                        <div class="postContentContainer">
+                            <h1 id="titulo_post">${post.titulo}</h1>
+                            <span id="conteudo_post">${post.descricao}</span>
+                        </div>
+                        <div class="interacao-container">
+                            <div class="interacao-box">
+                                <i class="fa-regular fa-heart" id="icon_curtida${post.idPost}" onclick="curtir(${post.idPost})"></i> <span id="qtdCurtidas${post.idPost}">${post.qtdCurtidas}</span>
+                            </div>
+                            <div class="interacao-box">
+                                <i class="fa-regular fa-comments" id="iconComent"></i> <span id="span_qtdComentarios">${post.qtdComentarios}</span>
+                            </div>
+                        </div>
+                        <div class="comentar-container">
+                            <textarea id="input_comentario" placeholder="Comente você também!"></textarea>
+                            <button class="enviar-botao" id="btn_comentario" onclick="publicarComentario()" disabled>Enviar</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="comentarios-container">
+                        <h2>Comentários</h2>
+                        <div id="sessao_comentario">
+                            <div class="nenhum-comentario"><span id="comentario_vazio"></span></div>
+                        </div>
+                    </div>`
                     
-                    autor_nome.innerHTML = post.nomeUsuario;
-                    titulo_post.innerHTML = post.titulo;
-                    conteudo_post.innerHTML = post.descricao;
-                    span_qtdCurtidas.innerHTML = post.qtdCurtidas;
-                    span_qtdComentarios.innerHTML = post.qtdComentarios;
-                    hora_post.innerHTML = calcularTempoAtras(post.dataHora);
-                    
+                    fetch(`/interacao/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                            if(resposta.ok){
+                                if (resposta.status == 204) {
+                                    var feed = document.getElementById("feed_container");
+                                    var mensagem = document.createElement("span");
+                                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                                    feed.appendChild(mensagem);
+                                    throw "Nenhum resultado encontrado!!";
+                                }
+                                resposta.json().then(function (resposta) {
+                                    
+                                    for (let i = 0; i < resposta.length; i++) {
+                                    var post = resposta[i];
+                                    if ((idUsuario == post.fkUsuario) && (idPost == post.fkPost)) {
+                                        console.log(`O usuário ${post.fkUsuario} curtiu a publicação ${idPost}`);
+                                        let icone = document.getElementById(`icon_curtida${post.fkPost}`);
+                                        console.log(post.fkPost)
+
+                                        icone.classList.remove("fa-regular");
+                                        icone.classList.add("fa-solid");
+                                        icone.classList.add("evidenciarElementoHover")
+                                    }
+                                }
+                                }
+                            );
+                        }
+                    });
+
+
                     if(resposta.comentarios.length == 0) {
                         comentario_vazio.innerHTML = "Seja o primeiro a comentar!"
                     }
@@ -122,6 +124,9 @@
                                 </div>
                             </div>`
                     });
+                    allTools()
+                    formatarInput();
+                    formatarEnter();
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -129,6 +134,7 @@
         }).catch(function (resposta) {
             console.error(resposta);
         });
+
     }
 
     function publicarComentario() {
@@ -178,14 +184,93 @@
         });
     }
 
-    const caixaComentario = document.getElementById("input_comentario")
-    caixaComentario.addEventListener("input", () =>{
-        if(caixaComentario.value==="") { 
-            document.getElementById('btn_comentario').disabled = true;
-            document.getElementById('btn_comentario').classList.remove('btn-on')
-        } else { 
-            document.getElementById('btn_comentario').disabled = false;
-            document.getElementById('btn_comentario').classList.add('btn-on')
+    function curtir(idPost) {
+        const iconeSelecionado = document.getElementById(`icon_curtida${idPost}`);
+        const estaCurtido = iconeSelecionado.classList.contains("fa-solid")
+        const naoEstaCurtido = iconeSelecionado.classList.contains("fa-regular")
+
+        if(estaCurtido) {
+            console.log(`O post ${idPost} está curtido`)
+
+            var corpo = {
+                idPost: idPost,
+                idUsuario: idUsuario}
+
+            fetch(`/interacao/removerCurtida`, {
+                method: "delete",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
+                if(resposta.ok) {
+                    let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
+                    let addComentario = +textoCurtidas - 1;
+                    document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+        } else if (naoEstaCurtido){
+            console.log(`Ta curtido não nego ${idPost}`)
+
+            var corpo = {
+                idPost: idPost,
+                idUsuario: idUsuario
         }
-    })
+
+            fetch(`/interacao/adicionarCurtida`, {
+                method: "post",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
+                if(resposta.ok) {
+                    let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
+                    let addComentario = +textoCurtidas + 1;
+                    document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+        return false;
+        }
+    };
+
+    function formatarInput() {
+        const caixaComentario = document.getElementById("input_comentario")
+        caixaComentario.addEventListener("input", () =>{
+            if(caixaComentario.value==="") { 
+                document.getElementById('btn_comentario').disabled = true;
+                document.getElementById('btn_comentario').classList.remove('btn-on')
+            } else { 
+                document.getElementById('btn_comentario').disabled = false;
+                document.getElementById('btn_comentario').classList.add('btn-on')
+            }
+        })
+    }
+
+    function formatarEnter() {
+        const textarea = document.getElementById("input_comentario");
+        textarea.onkeypress = function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                if(textarea.value != "") {
+                    publicarComentario();
+                    document.getElementById('btn_comentario').disabled = true;
+                    document.getElementById('btn_comentario').classList.remove('btn-on')
+                }
+            }
+        }
+    }
 </script>

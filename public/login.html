@@ -57,6 +57,11 @@
     botaoLogin.addEventListener('click', () => {
         main.classList.remove("painel-direita-ativo");
     });
+
+    function submitForm(event) {
+         event.preventDefault();
+      }
+    form.addEventListener('submit', submitForm);
     // CADASTRAR---------------------------------------------------------------------------------------------------------
     function cadastrar(){
         const user = inputUser.value.trim()
@@ -80,9 +85,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-            setTimeout(() => {
                 window.location = "login.html";
-            }, "2000");
             } else {
             throw "Houve um erro ao tentar realizar o cadastro!";
             }
@@ -123,10 +126,7 @@
                     sessionStorage.ID_USUARIO = json.idUsuario;
                     sessionStorage.NOME_USUARIO = json.nomeUsuario;
 
-
-                    setTimeout(function () {
-                        window.location = "./home.html";
-                    });
+                    window.location = "./home.html";
 
                 });
 

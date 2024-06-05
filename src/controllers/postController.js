@@ -21,6 +21,11 @@ function carregarPost(req, res) {
                             comentarios = [];
                         }
                     })
+
+                res.json({
+                    postagem: resultado,
+                    comentarios: comentarios
+                })
             } else {
                 res.status(403).send("Nenhum resultado encontrado!");
             }

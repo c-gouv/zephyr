@@ -103,7 +103,7 @@
                             </div>
                             <div class="postInteracao">
                                 <div class="interacao" id="divCurtida">
-                                    <i class="fa-regular fa-heart postInteracaoIcon" id="icon_curtida${post.idPost}" onclick="curtir(${post.idPost})"></i> ${post.qtdCurtidas}
+                                    <i class="fa-regular fa-heart postInteracaoIcon" id="icon_curtida${post.idPost}" onclick="curtir(${post.idPost})"></i> <span id="qtdCurtidas${post.idPost}">${post.qtdCurtidas}</span>
                                 </div>
                                 <div class="interacao" id="divComent">
                                     <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> ${post.qtdComentarios}
@@ -152,7 +152,6 @@
     }
     // PUBLICAR ----------------------------------------------------------------------------------------
     function publicar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
         const tituloPost = publicarTitulo.value
         const conteudoPost = publicarTexto.value
 
@@ -189,13 +188,65 @@
         const iconeSelecionado = document.getElementById(`icon_curtida${idPost}`);
         const estaCurtido = iconeSelecionado.classList.contains("fa-solid")
         const naoEstaCurtido = iconeSelecionado.classList.contains("fa-regular")
-
+        
         if(estaCurtido) {
             console.log(`O post ${idPost} está curtido`)
+
+            var corpo = {
+                idPost: idPost,
+                idUsuario: idUsuario}
+
+            fetch(`/interacao/removerCurtida`, {
+                method: "delete",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
+                if(resposta.ok) {
+                    let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
+                    let addComentario = +textoCurtidas - 1;
+                    document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+        return false;
         } else if (naoEstaCurtido){
             console.log(`Ta curtido não nego ${idPost}`)
+
+            var corpo = {
+                idPost: idPost,
+                idUsuario: idUsuario
         }
-    }
+
+            fetch(`/interacao/adicionarCurtida`, {
+                method: "post",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
+                if(resposta.ok) {
+                    let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
+                    let addComentario = +textoCurtidas + 1;
+                    document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+        return false;
+        }
+    };
     // FECHAR/ABRIR PUBLICAR ---------------------------------------------------------------------------
     function abrirModal(){
         const modalPublicarTexto = document.getElementById("modalPublicar")
