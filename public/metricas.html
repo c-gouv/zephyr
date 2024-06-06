@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zephyr | Métricas</title>
+    <title>Zephyr | Métricas do Usuário </title>
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/postPadrao.css">
     <link rel="stylesheet" href="./css/metricas.css">
     <link rel="shortcut icon" href="./assets/img/logo.svg">
+    <script src="./js/sessao.js"></script>
 </head>
 <body onload="postDashboard()">
     <header id="headerPadrao"></header>
@@ -24,7 +25,7 @@
                 Quantidade de Curtidas
                 <h2 id="kpi_curtida"></h2>
             </div>
-            <div class="kpi-box">
+            <div class="kpi-box" id="metricas">
                 Impressões Totais
                 <h2 id="kpi_engajamento"></h2>
             </div>
@@ -57,22 +58,25 @@
     function voltarPerfil(){
         window.location = "./perfil.html"
     }
+    
+    function exibirDadosGráfico(resultado) {
+        const grafico = document.getElementById('graphDashboard');
 
-    const grafico = document.getElementById('graphDashboard');
-    new Chart(grafico, {
-        type: 'line',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels = ['Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+
+        let dados = {
+            labels: labels,
             datasets: [{
-                data: [12, 15, 3, 5, 2, 3],
+                data: [],
                 borderWidth: 1,
                 fill: true,
-                lineTension: 0.2,
+                lineTension: 0.4,
                 borderColor: '#00fa38',
                 backgroundColor: '#00fa3830'
             }]
-        },
-        options: {
+        }
+
+        let opcoes = {
             plugins:{
                 legend:{
                     display: false
@@ -80,11 +84,29 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        beginAtZero: true,
+                        color: '#fff'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#fff'
+                    }
                 }
             }
         }
-    });
+
+        const config = {
+            type: 'line',
+            data: dados,
+            options: opcoes
+        };
+
+        new Chart(grafico, config);
+    }
 
     function postDashboard() {
         fetch(`/post/postDashboard/${idUsuario}`).then(function (resposta) {
@@ -129,6 +151,8 @@
                     kpi_curtida.innerHTML = curtidasJson
                     kpi_comentario.innerHTML = comentariosJson
                     kpi_engajamento.innerHTML = engajamento
+
+                    exibirDadosGráfico()
                 });
             } else {
                 throw ('Houve um erro na API!');

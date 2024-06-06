@@ -85,6 +85,36 @@
                             </div>
                         </div>`
                     }
+
+                    fetch(`/interacao/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                            if(resposta.ok){
+                                if (resposta.status == 204) {
+                                    var feed = document.getElementById("feed_container");
+                                    var mensagem = document.createElement("span");
+                                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                                    feed.appendChild(mensagem);
+                                    throw "Nenhum resultado encontrado!!";
+                                }
+                                resposta.json().then(function (resposta) {
+                                    console.log(resposta)
+                                    for (let i = 0; i < resposta.length; i++) {
+                                        var post = resposta[i];
+                                    console.log(post.fkPost)
+
+                                    if (idUsuario == post.fkUsuario) {
+                                        console.log(`O usuário ${post.fkUsuario} curtiu a publicação ${post.fkPost}`);
+                                        let icone = document.getElementById(`icon_curtida${post.fkPost}`);
+
+                                        icone.classList.remove("fa-regular");
+                                        icone.classList.add("fa-solid");
+                                        icone.classList.add("evidenciarElementoHover")
+                                        console.log(icone)
+                                    }
+                                };
+                            });
+                        }
+                    });
+
                     allTools();
                 });
             } else {
@@ -106,7 +136,7 @@
         }).then(function (resposta) {
 
             if (resposta.ok) {
-                locaiton.reload()
+                location.reload()
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {

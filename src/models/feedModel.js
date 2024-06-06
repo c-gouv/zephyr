@@ -30,7 +30,7 @@ function listarPorPerfil(idUsuario) {
             u.idUsuario,
             u.nomeUsuario,
             (SELECT COALESCE(count(idComentario)) FROM comentarioPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdComentarios,
-            COALESCE(p.curtida, 0) as qtdCurtidas
+            (SELECT COALESCE(count(idCurtida)) FROM curtidaPost JOIN post ON fkPost = idPost WHERE fkPost = p.idPost) as qtdCurtidas
         FROM post p
             JOIN usuario u
                 ON p.fkUsuario = u.idUsuario

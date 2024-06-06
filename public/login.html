@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="login">
-            <form action="#" onsubmit="login()">
+            <form action="#" onsubmit="login()" id="banana">
                 <img src="./assets/img/logoExtend.svg" class="logoLogin">
                 <input id="inputUserEmail" type="email" placeholder="Email" required="">
                 <input id="inputUserSenha" type="password" placeholder="Senha" required="">
@@ -61,7 +61,7 @@
     function submitForm(event) {
          event.preventDefault();
       }
-    form.addEventListener('submit', submitForm);
+    banana.addEventListener('submit', submitForm);
     // CADASTRAR---------------------------------------------------------------------------------------------------------
     function cadastrar(){
         const user = inputUser.value.trim()

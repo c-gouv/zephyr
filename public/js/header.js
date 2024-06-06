@@ -1,11 +1,6 @@
 (() => {
     document.getElementById("headerPadrao").innerHTML = `
     <img src="./assets/img/logo.svg" class="headerLogo" onclick="voltarHome()">
-    <div class="barraPesquisa">
-        <i class="fa-solid fa-magnifying-glass iconPesquisa" style="display: flex;"></i>
-        <hr style="height: 100%; width: 2px; background-color: white; border: none;">
-        <input type="text" class="inputPesquisa">
-    </div>
     <div class="headerUserArea">
         <img src="./assets/img/pfpIcon.svg" class="iconPfp" onclick="toggleModalPerfil()">
     </div>`

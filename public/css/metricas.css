@@ -79,3 +79,6 @@ h1{
 #graphDashboard{
     width: 38vw;
 }
+#metricas {
+    border: 1px solid #00fa38;
+}

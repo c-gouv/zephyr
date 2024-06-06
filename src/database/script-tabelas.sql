@@ -65,51 +65,32 @@ insert into post(fkUsuario, titulo, descricao) values
 	(1, "banana", "iahowiahdaiwhdiuawhdiuh");
         
 insert into comentarioPost(fkPost, fkUsuario, mensagem, dataHora) values
-	(1, 1, "banana ao quadrado parceirinho", now());
+	(15, 1, "banana ao quadrado parceirinho",  '2024-05-01 22:44:58');
     
 insert into curtidaPost(fkPost, fkUsuario, dataHora) values
-	(16, 5, now());
-
-SELECT
-	count(cur.fkUsuario)
-    FROM curtidaPost as cur
-        JOIN usuario as u ON cur.fkUsuario = u.idUsuario
-        JOIN post as p on p.fkUsuario = u.idUsuario
-        JOIN comentarioPost as com on com.fkPost = p.idPost
-        WHERE YEAR(cur.dataHora) = YEAR(CURRENT_DATE()) AND WEEK(cur.dataHora) = WEEK(CURRENT_DATE()) AND cur.fkUsuario = 1
-        GROUP BY cur.fkUsuario, cur.dataHora;
-        
-        
-SELECT
-    count(cur.idCurtida) AS total_curtidas
-FROM
-    curtidaPost AS cur
-    JOIN usuario AS u ON cur.fkUsuario = u.idUsuario
-    JOIN post AS p ON p.idPost = cur.fkPost
+	(15, 1, '2024-04-01 22:44:58');
+    
+SELECT 
+    MONTH(cp.dataHora) AS mes,
+    COUNT(*) AS total_curtidas
+FROM 
+    curtidaPost cp
+JOIN
+	post as p
+		ON cp.fkUsuario = c.fkUsuario
 WHERE
-    YEAR(cur.dataHora) = YEAR(CURRENT_DATE())
-    AND WEEK(cur.dataHora) = WEEK(CURRENT_DATE())
-    AND u.idUsuario = 1;
-        
-SELECT
-	(SELECT COUNT(*) from curtidaPost as cur join post as p on cur.fkPost = p.idPost) AS qtdCurtidas,
-	(SELECT COUNT(*) from comentarioPost as com join post as p on com.fkPost = p.idPost) AS qtdComentarios
-FROM
-	curtidaPost AS cur
-JOIN post AS p
-	ON cur.fkPost = p.idPost
-JOIN comentarioPost AS com
-	ON com.fkPost = p.idPost
-WHERE YEAR(cur.dataHora) = YEAR(CURRENT_DATE()) AND WEEK(cur.dataHora) = WEEK(CURRENT_DATE()) AND p.fkUsuario = 1;
-
+	idUsuario = 1
+GROUP BY 
+    MONTH(cp.dataHora);
+    
+SELECT MONTH(cp.dataHora) as mes, COUNT(*) as qtdCurtidas
+	FROM usuario as u JOIN post as p ON p.fkUsuario = idUsuario
+	JOIN curtidaPost as cp on cp.fkUsuario = idUsuario
+    WHERE p.fkUsuario = 1
+    GROUP BY MONTH(cp.dataHora);
+    
 SELECT COUNT(*) AS qtdCurtidas
-FROM curtidaPost AS cur
-JOIN post AS p ON cur.fkPost = p.idPost
-WHERE p.fkUsuario = 1;
-
-SELECT COUNT(*) AS qtdComentarios
-FROM comentarioPost AS com
-JOIN post AS p ON com.fkPost = p.idPost
-WHERE p.fkUsuario = 1;
-        
--- WHERE YEAR(c.dataHora) = YEAR(CURRENT_DATE()) AND WEEK(c.dataHora) = WEEK(CURRENT_DATE()) AND c.fkUsuario = 1
+    FROM usuario u JOIN post p ON p.fkUsuario = idUsuario
+    JOIN curtidaPost cur ON cur.fkPost = idUsuario
+    WHERE p.fkUsuario = 1
+    GROUP BY MONTH(cur.dataHora);
