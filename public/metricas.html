@@ -59,10 +59,10 @@
         window.location = "./perfil.html"
     }
     
-    function exibirDadosGráfico(resultado) {
+    function exibirDadosGráfico(resposta) {
         const grafico = document.getElementById('graphDashboard');
 
-        labels = ['Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        labels = []
 
         let dados = {
             labels: labels,
@@ -100,10 +100,17 @@
         }
 
         const config = {
-            type: 'line',
+            type: 'bar',
             data: dados,
             options: opcoes
         };
+
+        for (i = 0; i < resposta.length; i++) {
+            var interacao = resposta[i];
+
+            labels.push(interacao.dia);
+            dados.datasets[0].data.push(interacao.interacao);
+        }
 
         new Chart(grafico, config);
     }
@@ -152,7 +159,21 @@
                     kpi_comentario.innerHTML = comentariosJson
                     kpi_engajamento.innerHTML = engajamento
 
-                    exibirDadosGráfico()
+                    fetch(`/interacao/dadosGraphDashboard/${idUsuario}`).then(function (resposta) {
+                        if(resposta.ok) {
+                            resposta.json().then(resposta => {
+                                console.log(`Ó os dados aqui: ${JSON.stringify(resposta)}`)
+                                resposta.reverse()
+                                
+                                exibirDadosGráfico(resposta)
+                            })
+                                  
+                        } else {
+                            throw ('Houve um erro na API!');
+                        }
+                    }).catch(function (resposta) {
+                        console.error(resposta);
+                    });
                 });
             } else {
                 throw ('Houve um erro na API!');

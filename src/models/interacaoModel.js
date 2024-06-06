@@ -63,10 +63,37 @@ function removerCurtida(idPost, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function graphDashboard(idAutor) {
+    instrucaoSql = `
+    SELECT concat(DAY(i.dataHora), "/", MONTH(i.dataHora)) AS dia, COUNT(idInteracao) AS interacao
+        FROM interacao AS i JOIN post AS p
+            ON fkPost = idPost
+    WHERE p.fkUsuario = ${idAutor}
+    GROUP BY DAY(i.dataHora);`
+
+    return database.executar(instrucaoSql);
+}
+
+function adicionarRegistroInteracao(fkAutor, fkPost, tipoInteracao) {
+    instrucaoSql = `INSERT INTO interacao(fkAutor, fkPost, tipo, dataHora) values
+	    (${fkAutor}, ${fkPost}, "${tipoInteracao}", now());`
+
+    return database.executar(instrucaoSql);
+}
+
+function deletarRegistroInteracao(fkAutor, fkPost, tipoInteracao) {
+    instrucaoSql = `DELETE FROM interacao WHERE fkPost = ${fkPost} AND fkAutor = ${fkAutor} AND tipo = '${tipoInteracao}';`
+
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     carregarComentarioPost,
     publicarComentario,
     checarCurtidaUsuario,
     adicionarCurtida,
-    removerCurtida
+    removerCurtida,
+    graphDashboard,
+    adicionarRegistroInteracao,
+    deletarRegistroInteracao
 }

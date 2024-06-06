@@ -75,9 +75,67 @@ function removerCurtida(req, res) {
     );
 }
 
+function graphDashboard(req, res) {
+    const idAutor = req.params.idUsuario;
+
+    interacaoModel.graphDashboard(idAutor)
+        .then(
+            function (resultado) {
+                res.status(200).json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function adicionarRegistroInteracao(req, res) {
+    const fkAutor = req.body.idAutorServer
+    const fkPost = req.body.idPostServer
+    const tipoInteracao = req.body.tipoServer
+
+    interacaoModel.adicionarRegistroInteracao(fkAutor, fkPost, tipoInteracao)
+        .then(
+            function (resultado) {
+            res.status(200).json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function deletarRegistroInteracao(req, res) {
+    const fkAutor = req.body.idAutorServer
+    const fkPost = req.body.idPostServer
+    const tipoInteracao = req.body.tipoServer
+
+    interacaoModel.deletarRegistroInteracao(fkAutor, fkPost, tipoInteracao)
+        .then(
+            function (resultado) {
+            res.status(200).json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     publicarComentario,
     checarCurtidaUsuario,
     adicionarCurtida,
-    removerCurtida
+    removerCurtida,
+    graphDashboard,
+    adicionarRegistroInteracao,
+    deletarRegistroInteracao
 }

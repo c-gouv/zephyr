@@ -73,7 +73,7 @@
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
                     var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feedPost.innerHTML = `<span style="opacity: 0.5; width: 100%; text-align: center; color: white; padding-block: 10px">Você ainda não fez nenhuma postagem</span>`
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
@@ -207,6 +207,30 @@
                     let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
                     let addComentario = +textoCurtidas - 1;
                     document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+
+                    const corpoInt = {
+                        idAutorServer: idUsuario,
+                        idPostServer: idPost,
+                        tipoServer: "curtida"
+                    }
+
+                    fetch(`/interacao/deletarRegistroInteracao`, {
+                        method: "delete",
+                        headers: {
+                        "Content-Type": "application/json"},
+                        body: JSON.stringify(corpoInt)
+                    }).then(function (resposta) {
+                        if(resposta.ok) {
+                            console.log("Deu bom")
+                        } else if (resposta.status == 404) {
+                            window.alert("Deu 404!");
+                        } else {
+                            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                        }
+                    }).catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                        // finalizarAguardar();
+                    });
                 } else if (resposta.status == 404) {
                     window.alert("Deu 404!");
                 } else {
@@ -222,7 +246,7 @@
             var corpo = {
                 idPost: idPost,
                 idUsuario: idUsuario
-        }
+            }
 
             fetch(`/interacao/adicionarCurtida`, {
                 method: "post",
@@ -235,6 +259,30 @@
                     let textoCurtidas = document.getElementById(`qtdCurtidas${idPost}`).innerHTML;
                     let addComentario = +textoCurtidas + 1;
                     document.getElementById(`qtdCurtidas${idPost}`).innerHTML = addComentario;
+
+                    const corpoInt = {
+                        idAutorServer: idUsuario,
+                        idPostServer: idPost,
+                        tipoServer: "curtida"
+                    }
+
+                    fetch(`/interacao/adicionarRegistroInteracao`, {
+                        method: "post",
+                        headers: {
+                        "Content-Type": "application/json"},
+                        body: JSON.stringify(corpoInt)
+                    }).then(function (resposta) {
+                        if(resposta.ok) {
+                            console.log("Deu bom")
+                        } else if (resposta.status == 404) {
+                            window.alert("Deu 404!");
+                        } else {
+                            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                        }
+                    }).catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                        // finalizarAguardar();
+                    });
                 } else if (resposta.status == 404) {
                     window.alert("Deu 404!");
                 } else {

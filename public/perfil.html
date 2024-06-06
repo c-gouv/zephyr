@@ -57,6 +57,7 @@
                     
                     for (let i = 0; i < resposta.length; i++) {
                         var post = resposta[i];
+                        var idPost = post.idPost
                         console.log(post.nomeUsuario)
 
                         feed.innerHTML += `
@@ -77,16 +78,15 @@
                             </div>
                             <div class="postInteracao">
                                 <div class="interacao" id="divCurtida">
-                                    <i class="fa-regular fa-heart postInteracaoIcon" id="iconCurtida"></i> ${post.qtdCurtidas}
+                                    <i class="fa-regular fa-heart postInteracaoIcon" id="icon_curtida${post.idPost}"></i> ${post.qtdCurtidas}
                                 </div>
                                 <div class="interacao" id="divComent">
                                     <i class="fa-regular fa-comments postInteracaoIcon" id="iconComent"></i> ${post.qtdComentarios}
                                 </div>
                             </div>
                         </div>`
-                    }
-
-                    fetch(`/interacao/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
+                        
+                        fetch(`/interacao/checarCurtidaUsuario/${idPost}/${idUsuario}`).then(function (resposta) {
                             if(resposta.ok){
                                 if (resposta.status == 204) {
                                     var feed = document.getElementById("feed_container");
@@ -99,7 +99,6 @@
                                     console.log(resposta)
                                     for (let i = 0; i < resposta.length; i++) {
                                         var post = resposta[i];
-                                    console.log(post.fkPost)
 
                                     if (idUsuario == post.fkUsuario) {
                                         console.log(`O usuário ${post.fkUsuario} curtiu a publicação ${post.fkPost}`);
@@ -114,7 +113,8 @@
                             });
                         }
                     });
-
+                }
+                    
                     allTools();
                 });
             } else {

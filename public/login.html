@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="login">
-            <form action="#" onsubmit="login()" id="banana">
+            <form action="#" onsubmit="login()">
                 <img src="./assets/img/logoExtend.svg" class="logoLogin">
                 <input id="inputUserEmail" type="email" placeholder="Email" required="">
                 <input id="inputUserSenha" type="password" placeholder="Senha" required="">
@@ -57,11 +57,6 @@
     botaoLogin.addEventListener('click', () => {
         main.classList.remove("painel-direita-ativo");
     });
-
-    function submitForm(event) {
-         event.preventDefault();
-      }
-    banana.addEventListener('submit', submitForm);
     // CADASTRAR---------------------------------------------------------------------------------------------------------
     function cadastrar(){
         const user = inputUser.value.trim()
@@ -85,7 +80,9 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
+            setTimeout(() => {
                 window.location = "login.html";
+            }, "2000");
             } else {
             throw "Houve um erro ao tentar realizar o cadastro!";
             }
@@ -126,7 +123,10 @@
                     sessionStorage.ID_USUARIO = json.idUsuario;
                     sessionStorage.NOME_USUARIO = json.nomeUsuario;
 
-                    window.location = "./home.html";
+
+                    setTimeout(function () {
+                        window.location = "./home.html";
+                    });
 
                 });
 
