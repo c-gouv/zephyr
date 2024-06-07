@@ -260,6 +260,16 @@ h1{
     transform: translateX(30%) translateY(10%);
     /* height: 20vw; */
 }
+.sobre-dev{
+    transform: translateY(-100%);
+    background-color: #00fa38;
+    color: #1d1d1d;
+    height: 9vh;
+}
+.sobre-dev h1{
+    margin-left: 10%;
+    margin-top: 3%;
+}
 /* GAMBIARRA DE COR ---------------------------------------------------------- */
 h1 span:nth-child(10n + 1){
     color: red;
